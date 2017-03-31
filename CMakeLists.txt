@@ -38,11 +38,11 @@ endif()
 include(CTest)
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=legacy")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=legacy -fdefault-real-8")
 endif()
 
 option(DOUBLE_PRECISION
-  "Make the real and complex types eight bytes long" OFF)
+  "Make the real and complex types eight bytes long" ON)
 
 if(DOUBLE_PRECISION)
   if(CMAKE_Fortran_COMPILER_ID STREQUAL Intel)
