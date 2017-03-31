@@ -2587,7 +2587,7 @@ C----------------------------------------
       INCLUDE 'XFOIL.INC'
 C
 C---- convergence tolerance
-      DATA EPS1 / 1.0E-4 /
+      DATA EPS1 / 1.0E-7 /
 C
       NITER = NITER1
 C
