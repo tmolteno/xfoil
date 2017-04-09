@@ -116,30 +116,30 @@ c
        YOFF = 0.
        GWT = 0.8 / (YMAX-YMIN)
 c
-       call plinitialize
-       call colorspectrumhues(ncolor,'ROYGCB')
+!        call plinitialize
+!        call colorspectrumhues(ncolor,'ROYGCB')
 c
 c
-       call plopen(0.8,0,idev)
-       call newfactor(size)
+!        call plopen(0.8,0,idev)
+!        call newfactor(size)
 c
-       call plot(0.1,0.1,-3)
-       call plot(-xmin*GWT,-ymin*GWT,-3)
+!        call plot(0.1,0.1,-3)
+!        call plot(-xmin*GWT,-ymin*GWT,-3)
 c
-       do ic=1, ncolor
-         wcon = Wmax * float(ic-1)/float(ncolor-1)
-         call newcolor(-ic)
-         call CONTGRID(NX,NY,NX,NY,X,Y,W,WCON,XOFF,YOFF,GWT,GWT)
-       enddo
+!        do ic=1, ncolor
+!          wcon = Wmax * float(ic-1)/float(ncolor-1)
+!          call newcolor(-ic)
+!          call CONTGRID(NX,NY,NX,NY,X,Y,W,WCON,XOFF,YOFF,GWT,GWT)
+!        enddo
 c
-       call newcolorname('black')
+!        call newcolorname('black')
 c
        ydel = 2.0
        y1 = -12.0
        y2 =  12.0
 c
 c------------------
-       call plot(xmax*GWT+0.1,0.0,-3)
+!        call plot(xmax*GWT+0.1,0.0,-3)
 c
        uwt = 0.3
 c
@@ -147,51 +147,51 @@ c
        u1 = 0.
        u2 = 1.0
 c
-       call yaxis(0.0,y1*gwt,(y2-y1)*gwt,ydel*gwt,y1,ydel,ch,-2)
-       call xaxis(0.0,0.0,-uwt*(u2-u1),uwt*udel,u1,udel,ch,1)
+!        call yaxis(0.0,y1*gwt,(y2-y1)*gwt,ydel*gwt,y1,ydel,ch,-2)
+!        call xaxis(0.0,0.0,-uwt*(u2-u1),uwt*udel,u1,udel,ch,1)
 c
-       call xyline(ny,uavg,yavg,-0.5,uwt,0.0,gwt,1)
+!        call xyline(ny,uavg,yavg,-0.5,uwt,0.0,gwt,1)
 c
 c------------------
-       call plot(uwt+0.1,0.0,-3)
+!        call plot(uwt+0.1,0.0,-3)
 c
        twt = 3.0
 c
        tdel = 0.02
        t1 = 0.
        t2 = 0.1
-       call yaxis(0.0,y1*gwt,(y2-y1)*gwt,ydel*gwt,y1,ydel,ch,-2)
-       call xaxis(0.0,0.0,-twt*(t2-t1),twt*tdel,t1,tdel,ch,-2)
+!        call yaxis(0.0,y1*gwt,(y2-y1)*gwt,ydel*gwt,y1,ydel,ch,-2)
+!        call xaxis(0.0,0.0,-twt*(t2-t1),twt*tdel,t1,tdel,ch,-2)
 c
-       call xyline(ny,qq,yavg,0.0,twt,0.0,gwt,1)
-       call xyline(ny,uu,yavg,0.0,twt,0.0,gwt,2)
-       call xyline(ny,vv,yavg,0.0,twt,0.0,gwt,3)
-       call xyline(ny,uv,yavg,0.0,10.0*twt,0.0,gwt,4)
+!        call xyline(ny,qq,yavg,0.0,twt,0.0,gwt,1)
+!        call xyline(ny,uu,yavg,0.0,twt,0.0,gwt,2)
+!        call xyline(ny,vv,yavg,0.0,twt,0.0,gwt,3)
+!        call xyline(ny,uv,yavg,0.0,10.0*twt,0.0,gwt,4)
 c
 c------------------
 
-       call plflush
+!        call plflush
+!        pause
+!        call plend
+c
+c
+!        call plopen(0.8,0,idev)
+!        call newfactor(size)
+c
+!        call plot(0.1,0.1,-3)
+!        call plot(-xmin*GWT,-ymin*GWT,-3)
+c
+!        do ic=1, ncolor
+!          Ucon = -2.0 + 4.0*float(ic-1)/float(ncolor-1)
+!          call newcolor(-ic)
+!          call CONTGRID(NX,NY,NX,NY,X,Y,U,UCON,XOFF,YOFF,GWT,GWT)
+!        enddo
+c
+!        call plflush
        pause
-       call plend
 c
 c
-       call plopen(0.8,0,idev)
-       call newfactor(size)
-c
-       call plot(0.1,0.1,-3)
-       call plot(-xmin*GWT,-ymin*GWT,-3)
-c
-       do ic=1, ncolor
-         Ucon = -2.0 + 4.0*float(ic-1)/float(ncolor-1)
-         call newcolor(-ic)
-         call CONTGRID(NX,NY,NX,NY,X,Y,U,UCON,XOFF,YOFF,GWT,GWT)
-       enddo
-c
-       call plflush
-       pause
-c
-c
-       call plclose
+!        call plclose
        stop
        end
 

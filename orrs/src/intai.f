@@ -63,7 +63,7 @@ C
       IPSLU = 0
       SCRNFR = 0.85
 C
-      CALL PLINITIALIZE
+!       CALL PLINITIALIZE
 C
       PAR = 0.8
       CH = 0.02
@@ -74,70 +74,70 @@ C
  5    CONTINUE
 C
 C
-      DO 100 IPLOT=1, 7
-        IF(IPLOT.GT.1) CALL PLOT(0.0,0.0,-999)
+!       DO 100 IPLOT=1, 7
+!         IF(IPLOT.GT.1) CALL PLOT(0.0,0.0,-999)
+! C
+!         CALL PLOPEN(SCRNFR,IPSLU,IDEV)
+!         CALL NEWFACTOR(SIZE)
+!         CALL PLOT(5.0*CH,5.0*CH,-3)
+! C
+!         DELR = RTN(IPLOT)/FLOAT(NRANN)
+!         RWT = 1.0/RTN(IPLOT)
+!         CALL XAXIS(0.0,0.0,1.0,RWT*DELR,0.0,DELR,CH,-1)
+! C
+!         DA = ANN/FLOAT(NANN)
+!         AWT = PAR/ANN
+!         CALL YAXIS(0.0,0.0,PAR,AWT*DA,0.0,DA,CH,-1)
+! C
+!         CALL PLGRID(0.0,0.0,NRANN,RWT*DELR,NANN,AWT*DA,LMASK)
+! C
+! C
+!         DO 10 IH=IH1(IPLOT), IH2(IPLOT)
+!           DO 102 IR=1, NR
+!             CALL DAMPL(H(IH),R(IR,IH),FEN(IR))
+!  102      CONTINUE
+! C
+!           CALL XYPLOT(NR,R(1,IH),FEN,0.0,RWT,0.0,AWT,2,0.0,0)
+! C
+!           DO 105 IR=2, NR
+!             IFMAX = 1
+!             AFMAX = 0.0
+!             DO 1052 IF=1, NF
+!               IF(A(IR,IF,IH) .GT. AFMAX) THEN
+!                AFMAX = A(IR,IF,IH)
+!                IFMAX = IF
+!               ENDIF
+!  1052       CONTINUE
+!             IF(AFMAX.EQ.0.0) GO TO 105
+! C
+! ccc            DO 1055 IF=IFMAX, IFMAX
+!             DO 1055 IF=1, NF
+!               XPLT1 = RWT*R(IR-1,IH)
+!               YPLT1 = AWT*A(IR-1,IF,IH)
+!               XPLT2 = RWT*R(IR,IH)
+!               YPLT2 = AWT*A(IR,IF,IH)
+!               IF(YPLT2 .LE. YPLT1) GO TO 1055
+!               IF(YPLT2 .GT.   PAR) GO TO 1055
+!               IF(XPLT2 .GT.   1.0) GO TO 10
+! C
+!               CALL PLOT(XPLT1,YPLT1,3)
+!               CALL PLOT(XPLT2,YPLT2,2)
+!  1055       CONTINUE
+!  105      CONTINUE
+!  10     CONTINUE
+! C
+!         CALL PLFLUSH
+! C
+!         WRITE(*,*) 'Hardcopy ?   N'
+!         READ(*,8000) ANS
+!  8000   FORMAT(A)
+!         IF(INDEX('Yy',ANS).NE.0) CALL REPLOT(IDEVRP)
+! C
+!         CALL PLEND
+! C
+!  100  CONTINUE
 C
-        CALL PLOPEN(SCRNFR,IPSLU,IDEV)
-        CALL NEWFACTOR(SIZE)
-        CALL PLOT(5.0*CH,5.0*CH,-3)
-C
-        DELR = RTN(IPLOT)/FLOAT(NRANN)
-        RWT = 1.0/RTN(IPLOT)
-        CALL XAXIS(0.0,0.0,1.0,RWT*DELR,0.0,DELR,CH,-1)
-C
-        DA = ANN/FLOAT(NANN)
-        AWT = PAR/ANN
-        CALL YAXIS(0.0,0.0,PAR,AWT*DA,0.0,DA,CH,-1)
-C
-        CALL PLGRID(0.0,0.0,NRANN,RWT*DELR,NANN,AWT*DA,LMASK)
-C
-C
-        DO 10 IH=IH1(IPLOT), IH2(IPLOT)
-          DO 102 IR=1, NR
-            CALL DAMPL(H(IH),R(IR,IH),FEN(IR))
- 102      CONTINUE
-C
-          CALL XYPLOT(NR,R(1,IH),FEN,0.0,RWT,0.0,AWT,2,0.0,0)
-C
-          DO 105 IR=2, NR
-            IFMAX = 1
-            AFMAX = 0.0
-            DO 1052 IF=1, NF
-              IF(A(IR,IF,IH) .GT. AFMAX) THEN
-               AFMAX = A(IR,IF,IH)
-               IFMAX = IF
-              ENDIF
- 1052       CONTINUE
-            IF(AFMAX.EQ.0.0) GO TO 105
-C
-ccc            DO 1055 IF=IFMAX, IFMAX
-            DO 1055 IF=1, NF
-              XPLT1 = RWT*R(IR-1,IH)
-              YPLT1 = AWT*A(IR-1,IF,IH)
-              XPLT2 = RWT*R(IR,IH)
-              YPLT2 = AWT*A(IR,IF,IH)
-              IF(YPLT2 .LE. YPLT1) GO TO 1055
-              IF(YPLT2 .GT.   PAR) GO TO 1055
-              IF(XPLT2 .GT.   1.0) GO TO 10
-C
-              CALL PLOT(XPLT1,YPLT1,3)
-              CALL PLOT(XPLT2,YPLT2,2)
- 1055       CONTINUE
- 105      CONTINUE
- 10     CONTINUE
-C
-        CALL PLFLUSH
-C
-        WRITE(*,*) 'Hardcopy ?   N'
-        READ(*,8000) ANS
- 8000   FORMAT(A)
-        IF(INDEX('Yy',ANS).NE.0) CALL REPLOT(IDEVRP)
-C
-        CALL PLEND
-C
- 100  CONTINUE
-C
-      CALL PLCLOSE
+!       CALL PLCLOSE
       STOP
       END
 

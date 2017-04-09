@@ -922,188 +922,188 @@ CCC           120   0.12134  -0.10234  -0.30234   180.024      2025.322
 
 
 
-      SUBROUTINE PLTCRV(SBLE,XB,XBP,YB,YBP,SB,NB,CV)
-C
-C---- Plot the curvature on the blade
-C
-      DIMENSION  XB(NB),XBP(NB),YB(NB),YBP(NB),SB(NB),CV(NB)
-      CHARACTER ANS*1, ANSARG*128
-      LOGICAL LCVEXP, ERROR
-C
-      DATA LMASK0, LMASK1, LMASK2, LMASK3 / -1, -32640, -30584, -21846 /
-C
-      CH = 0.01
-      LCVEXP = .FALSE.
-      CVEXP = 1.0/3.0
-C
- 10   SBTOT = 0.5*(SB(NB)-SB(1))
-      XTE = 0.5*(XB(NB)+XB(1))
-      YTE = 0.5*(YB(NB)+YB(1))
-      XLE = SEVAL(SBLE,XB,XBP,SB,NB)
-      YLE = SEVAL(SBLE,YB,YBP,SB,NB)
-      CVLE = CURV(SBLE,XB,XBP,YB,YBP,SB,NB) * SBTOT
-      IF(LCVEXP) CVLE = CVLE**CVEXP
-C
-      CVMAX = CVLE
-      SVMAX = SBLE
-      XVMAX = XLE
-      CVMIN = CVLE
-      SVMIN = SBLE
-      XVMIN = XLE
-      DO I=1, NB
-C---- set up curvature array
-        CV(I) = CURV(SB(I),XB,XBP,YB,YBP,SB,NB) * SBTOT
-        IF(LCVEXP) THEN
-          IF(CV(I).GT.0.0) THEN
-            CV(I) = CV(I)**CVEXP
-           ELSEIF(CV(I).EQ.0.0) THEN
-            CV(I) = 0.0
-           ELSEIF(CV(I).LT.0.0) THEN
-            CVSGN = SIGN(1.0,CV(I))
-            CV(I) = CVSGN*(ABS(CV(I))**CVEXP)
-          ENDIF
-        ENDIF
-        IF(CV(I).GT.CVMAX) THEN
-          CVMAX = CV(I)
-          SVMAX = SB(I)
-          XVMAX = XB(I)
-        ENDIF
-        IF(CV(I).LT.CVMIN) THEN
-          CVMIN = CV(I)
-          SVMIN = SB(I)
-          XVMIN = XB(I)
-        ENDIF
-        IF(SB(I).LE.SBLE) ILE = I
-      END DO
-C
-cc    CALL SCALIT(1,CVMAX-CVMIN,0.0,CWT)
-      CVMX = CVMAX
-      CVMN = CVMIN
-      CALL AXISADJ(CVMN,CVMX,CVSPAN,CVDEL,NCVTICS)
-      CWT = 1.0/CVSPAN
-      XMX = XTE
-      XMN = XLE
-      CALL AXISADJ(XMN,XMX,XSPAN,XDEL,NXTICS)
-C--- Correct min/max for points just slightly off from a major division in X
-      IF(XLE-XMN.GT.0.95*XDEL) XMN = XMN + XDEL
-      IF(XMX-XTE.GT.0.95*XDEL) XMX = XMX - XDEL
-      XSPAN = XMX-XMN
-      XWT = 1.0/XSPAN
-C
-      PAR  =  0.75
-      XLEN =  0.8
-      YLEN =  PAR*XLEN
-      XMIN =  XMN
-      XMAX =  XMX
-      XDEL =  XDEL
-      NXG  =  (XMAX-XMIN)/XDEL
-      XSF  =  XLEN/(XMAX-XMIN)
-      XOF  =  XMN
-      YMIN =  CVMN
-      YMAX =  CVMX
-      YDEL =  CVDEL
-      NYG  =  (YMAX-YMIN)/YDEL
-      YSF  =  YLEN/(YMAX-YMIN)
-      YOF  =  0.0
-C
-      CALL PLTINI
-      CALL PLOT(0.14,0.1+YLEN*(-YMIN/(YMAX-YMIN)),-3)
-C
-C--- X axis (x/c)
-      CALL NEWPEN(2)
-      XLN = XLEN
-      IF(XMIN.EQ.0.0) XLN = -XLN
-      CALL XAXIS(0.0,0.0,XLN,XSF*XDEL,XMIN,XDEL,CH,1)  
-      XC = XSF*3.5*XDEL -0.5*1.2*CH
-      YC =              -3.5*1.2*CH
-      CALL PLCHAR(XC,YC,1.2*CH,'X',0.0,1)
-C
-C--- Y axis (curvature)
-      CALL YAXIS(0.0,YSF*YMIN,YLEN,YSF*YDEL,YMIN,YDEL,CH,1)
-      XC =              -4.5*1.2*CH
-      YC = YSF*(YMAX-0.5*YDEL) - 0.5*1.2*CH
-      IF(LCVEXP) THEN
-        CALL PLCHAR(XC-4.5*1.2*CH,YC,1.2*CH,'CV^',0.0,3)
-        CALL PLNUMB(XC-1.5*1.2*CH,YC+0.5*CH,CH,CVEXP,0.0,2)
-       ELSE
-        CALL PLCHAR(XC,YC,1.2*CH,'CV',0.0,2)
-      ENDIF
-C
-      CALL PLGRID(0.0,YSF*YMIN, NXG,XSF*XDEL, NYG,YSF*YDEL, LMASK2)
-      XC = 0.0
-      YC = YSF*YMAX + 1.0*1.2*CH
-      IF(LCVEXP) THEN
-        CALL PLCHAR(XC,YC,1.2*CH,'Curvature^n vs X',0.0,16)
-       ELSE
-        CALL PLCHAR(XC,YC,1.2*CH,'Curvature vs X',0.0,16)
-      ENDIF
-C
-C--- Upper surface curvature
-      CALL GETCOLOR(ICOL0)
-      CALL NEWCOLORNAME('yellow')
-      CALL XYLINE(ILE,XB,CV,XOF,XSF,YOF,YSF,1)
-      XC = XSF*(XB(2*ILE/3)-XOF)
-      YC = YSF*(CV(2*ILE/3)-YOF)
-      CALL PLCHAR(XC+0.5*CH,YC+0.5*CH,CH,'Upper',0.0,5)
-C
-C--- LE curvature
-      CALL NEWCOLORNAME('red')
-      XC = XSF*(XLE-XOF)
-      YC = YSF*(CVLE-YOF)
-      CALL PLSYMB(XC,YC,CH,3,0.0,0)
-      CALL PLCHAR(XC+1.0*CH,YC-0.5*CH,CH,'LE',0.0,2)
-C
-C--- Lower surface curvature
-      CALL NEWCOLORNAME('cyan')
-      CALL XYLINE(NB-ILE+1,XB(ILE),CV(ILE),XOF,XSF,YOF,YSF,2)
-      XC = XSF*(XB((ILE+NB)/2)-XOF)
-      YC = YSF*(CV((ILE+NB)/2)-YOF)
-      CALL PLCHAR(XC+0.5*CH,YC+0.5*CH,CH,'Lower',0.0,5)
-C
-      CALL NEWCOLOR(ICOL0)
-      CALL PLFLUSH
-C
-C
- 20   WRITE(*,*) ' '
-      WRITE(*,*) 'Airfoil curvature (yellow-upper, cyan-lower) '
-      IF(LCVEXP) THEN
-       WRITE(*,*) ' Range compressed using CV=(curvature)^n with n =',
-     &              CVEXP
-      ENDIF
-      WRITE(*,*) ' CVLE  = ',CVLE, ' at S = ',SBLE, ' at X = ',XLE
-      WRITE(*,*) ' CVmax = ',CVMAX,' at S = ',SVMAX,' at X = ',XVMAX
-      WRITE(*,*) ' CVmin = ',CVMIN,' at S = ',SVMIN,' at X = ',XVMIN
-C
-      WRITE(*,*) ' '
-      WRITE(*,*) 'Enter C for curvature    plot'
-      WRITE(*,*) 'Enter N for curvature**N plot'
-      WRITE(*,*) 'Hit <cr> to exit'
-      ANSARG = ' '
-      CALL ASKC('..CPLO^',ANS,ANSARG)
-      IF(ANS.EQ.' ') RETURN
-C
-      RINPUT = 0.0
-      NINPUT = 1
-      CALL GETFLT(ANSARG,RINPUT,NINPUT,ERROR)
-C
-      IF(ANS.EQ.'n' .OR. ANS.EQ.'N') THEN
-        IF(NINPUT.GE.1) THEN
-          CVEXP = RINPUT
-         ELSE
-          CVEXP = 0.3
-          CALL ASKR('Enter curvature exponent (default 0.3)^',CVEXP)
-        ENDIF
-        LCVEXP = .TRUE.
-        GO TO 10
-      ENDIF 
-      IF(ANS.EQ.'c' .OR. ANS.EQ.'C') THEN
-        LCVEXP = .FALSE.
-        GO TO 10
-      ENDIF 
-      GO TO 20
-C
- 1000 FORMAT(A)
-      END
+!       SUBROUTINE PLTCRV(SBLE,XB,XBP,YB,YBP,SB,NB,CV)
+! C
+! C---- Plot the curvature on the blade
+! C
+!       DIMENSION  XB(NB),XBP(NB),YB(NB),YBP(NB),SB(NB),CV(NB)
+!       CHARACTER ANS*1, ANSARG*128
+!       LOGICAL LCVEXP, ERROR
+! C
+!       DATA LMASK0, LMASK1, LMASK2, LMASK3 / -1, -32640, -30584, -21846 /
+! C
+!       CH = 0.01
+!       LCVEXP = .FALSE.
+!       CVEXP = 1.0/3.0
+! C
+!  10   SBTOT = 0.5*(SB(NB)-SB(1))
+!       XTE = 0.5*(XB(NB)+XB(1))
+!       YTE = 0.5*(YB(NB)+YB(1))
+!       XLE = SEVAL(SBLE,XB,XBP,SB,NB)
+!       YLE = SEVAL(SBLE,YB,YBP,SB,NB)
+!       CVLE = CURV(SBLE,XB,XBP,YB,YBP,SB,NB) * SBTOT
+!       IF(LCVEXP) CVLE = CVLE**CVEXP
+! C
+!       CVMAX = CVLE
+!       SVMAX = SBLE
+!       XVMAX = XLE
+!       CVMIN = CVLE
+!       SVMIN = SBLE
+!       XVMIN = XLE
+!       DO I=1, NB
+! C---- set up curvature array
+!         CV(I) = CURV(SB(I),XB,XBP,YB,YBP,SB,NB) * SBTOT
+!         IF(LCVEXP) THEN
+!           IF(CV(I).GT.0.0) THEN
+!             CV(I) = CV(I)**CVEXP
+!            ELSEIF(CV(I).EQ.0.0) THEN
+!             CV(I) = 0.0
+!            ELSEIF(CV(I).LT.0.0) THEN
+!             CVSGN = SIGN(1.0,CV(I))
+!             CV(I) = CVSGN*(ABS(CV(I))**CVEXP)
+!           ENDIF
+!         ENDIF
+!         IF(CV(I).GT.CVMAX) THEN
+!           CVMAX = CV(I)
+!           SVMAX = SB(I)
+!           XVMAX = XB(I)
+!         ENDIF
+!         IF(CV(I).LT.CVMIN) THEN
+!           CVMIN = CV(I)
+!           SVMIN = SB(I)
+!           XVMIN = XB(I)
+!         ENDIF
+!         IF(SB(I).LE.SBLE) ILE = I
+!       END DO
+! C
+! cc    CALL SCALIT(1,CVMAX-CVMIN,0.0,CWT)
+!       CVMX = CVMAX
+!       CVMN = CVMIN
+!       CALL AXISADJ(CVMN,CVMX,CVSPAN,CVDEL,NCVTICS)
+!       CWT = 1.0/CVSPAN
+!       XMX = XTE
+!       XMN = XLE
+!       CALL AXISADJ(XMN,XMX,XSPAN,XDEL,NXTICS)
+! C--- Correct min/max for points just slightly off from a major division in X
+!       IF(XLE-XMN.GT.0.95*XDEL) XMN = XMN + XDEL
+!       IF(XMX-XTE.GT.0.95*XDEL) XMX = XMX - XDEL
+!       XSPAN = XMX-XMN
+!       XWT = 1.0/XSPAN
+! C
+!       PAR  =  0.75
+!       XLEN =  0.8
+!       YLEN =  PAR*XLEN
+!       XMIN =  XMN
+!       XMAX =  XMX
+!       XDEL =  XDEL
+!       NXG  =  (XMAX-XMIN)/XDEL
+!       XSF  =  XLEN/(XMAX-XMIN)
+!       XOF  =  XMN
+!       YMIN =  CVMN
+!       YMAX =  CVMX
+!       YDEL =  CVDEL
+!       NYG  =  (YMAX-YMIN)/YDEL
+!       YSF  =  YLEN/(YMAX-YMIN)
+!       YOF  =  0.0
+! C
+! !       CALL PLTINI
+! !       CALL PLOT(0.14,0.1+YLEN*(-YMIN/(YMAX-YMIN)),-3)
+! C
+! C--- X axis (x/c)
+!       CALL NEWPEN(2)
+!       XLN = XLEN
+!       IF(XMIN.EQ.0.0) XLN = -XLN
+!       CALL XAXIS(0.0,0.0,XLN,XSF*XDEL,XMIN,XDEL,CH,1)  
+!       XC = XSF*3.5*XDEL -0.5*1.2*CH
+!       YC =              -3.5*1.2*CH
+!       CALL PLCHAR(XC,YC,1.2*CH,'X',0.0,1)
+! C
+! C--- Y axis (curvature)
+!       CALL YAXIS(0.0,YSF*YMIN,YLEN,YSF*YDEL,YMIN,YDEL,CH,1)
+!       XC =              -4.5*1.2*CH
+!       YC = YSF*(YMAX-0.5*YDEL) - 0.5*1.2*CH
+!       IF(LCVEXP) THEN
+!         CALL PLCHAR(XC-4.5*1.2*CH,YC,1.2*CH,'CV^',0.0,3)
+!         CALL PLNUMB(XC-1.5*1.2*CH,YC+0.5*CH,CH,CVEXP,0.0,2)
+!        ELSE
+!         CALL PLCHAR(XC,YC,1.2*CH,'CV',0.0,2)
+!       ENDIF
+! C
+!       CALL PLGRID(0.0,YSF*YMIN, NXG,XSF*XDEL, NYG,YSF*YDEL, LMASK2)
+!       XC = 0.0
+!       YC = YSF*YMAX + 1.0*1.2*CH
+!       IF(LCVEXP) THEN
+!         CALL PLCHAR(XC,YC,1.2*CH,'Curvature^n vs X',0.0,16)
+!        ELSE
+!         CALL PLCHAR(XC,YC,1.2*CH,'Curvature vs X',0.0,16)
+!       ENDIF
+! C
+! C--- Upper surface curvature
+!       CALL GETCOLOR(ICOL0)
+!       CALL NEWCOLORNAME('yellow')
+!       CALL XYLINE(ILE,XB,CV,XOF,XSF,YOF,YSF,1)
+!       XC = XSF*(XB(2*ILE/3)-XOF)
+!       YC = YSF*(CV(2*ILE/3)-YOF)
+!       CALL PLCHAR(XC+0.5*CH,YC+0.5*CH,CH,'Upper',0.0,5)
+! C
+! C--- LE curvature
+!       CALL NEWCOLORNAME('red')
+!       XC = XSF*(XLE-XOF)
+!       YC = YSF*(CVLE-YOF)
+!       CALL PLSYMB(XC,YC,CH,3,0.0,0)
+!       CALL PLCHAR(XC+1.0*CH,YC-0.5*CH,CH,'LE',0.0,2)
+! C
+! C--- Lower surface curvature
+!       CALL NEWCOLORNAME('cyan')
+!       CALL XYLINE(NB-ILE+1,XB(ILE),CV(ILE),XOF,XSF,YOF,YSF,2)
+!       XC = XSF*(XB((ILE+NB)/2)-XOF)
+!       YC = YSF*(CV((ILE+NB)/2)-YOF)
+!       CALL PLCHAR(XC+0.5*CH,YC+0.5*CH,CH,'Lower',0.0,5)
+! C
+!       CALL NEWCOLOR(ICOL0)
+!       CALL PLFLUSH
+! C
+! C
+!  20   WRITE(*,*) ' '
+!       WRITE(*,*) 'Airfoil curvature (yellow-upper, cyan-lower) '
+!       IF(LCVEXP) THEN
+!        WRITE(*,*) ' Range compressed using CV=(curvature)^n with n =',
+!      &              CVEXP
+!       ENDIF
+!       WRITE(*,*) ' CVLE  = ',CVLE, ' at S = ',SBLE, ' at X = ',XLE
+!       WRITE(*,*) ' CVmax = ',CVMAX,' at S = ',SVMAX,' at X = ',XVMAX
+!       WRITE(*,*) ' CVmin = ',CVMIN,' at S = ',SVMIN,' at X = ',XVMIN
+! C
+!       WRITE(*,*) ' '
+!       WRITE(*,*) 'Enter C for curvature    plot'
+!       WRITE(*,*) 'Enter N for curvature**N plot'
+!       WRITE(*,*) 'Hit <cr> to exit'
+!       ANSARG = ' '
+!       CALL ASKC('..CPLO^',ANS,ANSARG)
+!       IF(ANS.EQ.' ') RETURN
+! C
+!       RINPUT = 0.0
+!       NINPUT = 1
+!       CALL GETFLT(ANSARG,RINPUT,NINPUT,ERROR)
+! C
+!       IF(ANS.EQ.'n' .OR. ANS.EQ.'N') THEN
+!         IF(NINPUT.GE.1) THEN
+!           CVEXP = RINPUT
+!          ELSE
+!           CVEXP = 0.3
+!           CALL ASKR('Enter curvature exponent (default 0.3)^',CVEXP)
+!         ENDIF
+!         LCVEXP = .TRUE.
+!         GO TO 10
+!       ENDIF 
+!       IF(ANS.EQ.'c' .OR. ANS.EQ.'C') THEN
+!         LCVEXP = .FALSE.
+!         GO TO 10
+!       ENDIF 
+!       GO TO 20
+! C
+!  1000 FORMAT(A)
+!       END
 
 
 

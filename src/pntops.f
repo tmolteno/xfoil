@@ -290,9 +290,9 @@ C---- do possible pan,zoom operations based on KCHAR
 C
       IF(LPLNEW) THEN
 C----- scales,offsets have changed... replot
-       CALL GOFSET
-       CALL PLTINI
-       CALL PLOTG
+!        CALL GOFSET
+!        CALL PLTINI
+!        CALL PLOTG
        GO TO 10
       ENDIF
 C
@@ -358,9 +358,9 @@ C---- do possible pan,zoom operations based on KCHAR
 C
       IF(LPLNEW) THEN
 C----- scales,offsets have changed... replot
-       CALL GOFSET
-       CALL PLTINI
-       CALL PLOTG
+!        CALL GOFSET
+!        CALL PLTINI
+!        CALL PLOTG
        GO TO 10
       ENDIF
 C

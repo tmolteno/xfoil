@@ -34,7 +34,7 @@ C
       DIMENSION RINPUT(20)
       LOGICAL ERROR, LRECALC, LCLEAR, LGPARSAVE
 C
-      EXTERNAL NEWPLOTC
+!       EXTERNAL NEWPLOTC
 C
       DATA LMASK0, LMASK1, LMASK2, LMASK3 / -1, -32640, -30584, -21846 /
 C
@@ -160,9 +160,9 @@ C--------------------------------------------------------------
 C---- pick up here to replot everything
  300  CONTINUE
       LGPARM = .NOT.LDCPLOT
-      CALL PLTINI
-      CALL PLOTG
-      CALL PLOTC
+!       CALL PLTINI
+!       CALL PLOTG
+!       CALL PLOTC
 C
 C==================================================
 C---- top of menu loop 
@@ -181,9 +181,9 @@ C---- process previous command ?
 C
       IF(COMAND.EQ.'    ') THEN
 C----- just <return> was typed... clean up plotting and exit CAMP
-       IF(LPLOT) CALL PLEND
+!        IF(LPLOT) CALL PLEND
        LPLOT = .FALSE.
-       CALL CLRZOOM
+!        CALL CLRZOOM
        LGPARM = LGPARSAVE
        RETURN
       ENDIF
@@ -199,7 +199,7 @@ C---- extract command line numeric arguments
       CALL GETFLT(COMARG,RINPUT,NINPUT,ERROR)
 C
       IF(COMAND.EQ.'    ') THEN
-       IF(LPLOT) CALL PLEND
+!        IF(LPLOT) CALL PLEND
        RETURN
 C
       ELSEIF(COMAND.EQ.'?   ') THEN
@@ -229,14 +229,14 @@ C
      &  /'   HARD     Hardcopy current plot')
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'Z   ') THEN
-       CALL USETZOOM(.TRUE.,.TRUE.)
-       CALL REPLOT(IDEV)
+!       ELSEIF(COMAND.EQ.'Z   ') THEN
+!        CALL USETZOOM(.TRUE.,.TRUE.)
+!        CALL REPLOT(IDEV)
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'U   ') THEN
-       CALL CLRZOOM
-       CALL REPLOT(IDEV)
+!       ELSEIF(COMAND.EQ.'U   ') THEN
+!        CALL CLRZOOM
+!        CALL REPLOT(IDEV)
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'TFAC') THEN
@@ -360,8 +360,8 @@ cc     &       /' Identical successive points enable a slope break',
      &        /' <cr> ends input')
 C
 C--- Points of x/c, y/c are added to existing definition of added camber line
-       CALL GETCOLOR(ICOL0)
-       CALL NEWCOLORNAME('RED')
+!        CALL GETCOLOR(ICOL0)
+!        CALL NEWCOLORNAME('RED')
        NCADD = 0
        DO 25 I=1, 2*IQX
  23      READ(*,1000,ERR=24) LINE
@@ -378,8 +378,8 @@ C--- Points of x/c, y/c are added to existing definition of added camber line
 C
          XPL = XSF*(XCADD(NCADD)-XOFF)
          YPL = YSF*(YCADD(NCADD)-YOFF-DYOFFC)
-         CALL PLSYMB(XPL,YPL,CHS*XSF,1,0.0,I-1)
-         CALL PLFLUSH
+!          CALL PLSYMB(XPL,YPL,CHS*XSF,1,0.0,I-1)
+!          CALL PLFLUSH
          GO TO 25
  24      WRITE(*,*) 'try again'
          GO TO 23
@@ -387,7 +387,7 @@ C
 C----- Sort points allowing duplicates for slope breaks 
  26    CALL SORTDUP(NCADD,XCADD,YCADD)
        CALL FIXDUP (NCADD,XCADD,YCADD)
-       CALL NEWCOLOR(ICOL0)
+!        CALL NEWCOLOR(ICOL0)
 C----- spline camber line y(x)
        CALL SEGSPL(YCADD,YCADDP,XCADD,NCADD)
 C
@@ -408,20 +408,20 @@ C----- Manual input of loading points
 cc     &       /' Identical successive points enable a slope break',
      &        /' <cr> ends input')
 C
-       CALL GETPEN(IPN)
-       CALL GETCOLOR(ICOL0)
+!        CALL GETPEN(IPN)
+!        CALL GETCOLOR(ICOL0)
 C
-       CALL NEWPEN(1)
+!        CALL NEWPEN(1)
        CHL = 1.5*CHG
        YOFFP = (DYOFFP+YOFF)/YSFP
-       CALL GRDAIR(XPMIN,XPMAX,YPMIN,YPMAX,DXYG,DXYP,CHG,.FALSE.,.TRUE.,
-     &             XOFF,XSF,YOFFP,YSF*YSFP, LMASK2)
-       CALL NEWCOLORNAME('RED')
-       CALL NEWPEN(2)
+!        CALL GRDAIR(XPMIN,XPMAX,YPMIN,YPMAX,DXYG,DXYP,CHG,.FALSE.,.TRUE.,
+!      &             XOFF,XSF,YOFFP,YSF*YSFP, LMASK2)
+!        CALL NEWCOLORNAME('RED')
+!        CALL NEWPEN(2)
        XLAB = (XPMIN         -XOFF )*XSF      - 4.0*CHL
        YLAB = (YPMAX-0.5*DXYP-YOFFP)*YSFP*YSF - 0.6*CHL
-       CALL PLCHAR(XLAB,YLAB,CHL,' Cp',0.0,3)
-       CALL PLMATH(XLAB,YLAB,CHL,'O  ',0.0,3)
+!        CALL PLCHAR(XLAB,YLAB,CHL,' Cp',0.0,3)
+!        CALL PLMATH(XLAB,YLAB,CHL,'O  ',0.0,3)
 C
 C--- Points of x/c, dCp are added to existing definition of loading line
        DO 35 I=1, 2*IQX
@@ -440,8 +440,8 @@ C
          YOFFP = (DYOFFP*YOFF)/YSFP
          XPL = (XPADD(NPADD)-XOFF )*XSF
          YPL = (YPADD(NPADD)-YOFFP)*YSFP*YSF
-         CALL PLSYMB(XPL,YPL,CHS,1,0.0,I-1)
-         CALL PLFLUSH
+!          CALL PLSYMB(XPL,YPL,CHS,1,0.0,I-1)
+!          CALL PLFLUSH
          GO TO 35
  34      WRITE(*,*) 'try again'
          GO TO 33
@@ -451,8 +451,8 @@ C----- Sort points allowing duplicates for slope breaks
        CALL SORTDUP(NPADD,XPADD,YPADD)
        CALL FIXDUP (NPADD,XPADD,YPADD)
 C
-       CALL NEWCOLOR(ICOL0)
-       CALL NEWPEN(IPN)
+!        CALL NEWCOLOR(ICOL0)
+!        CALL NEWPEN(IPN)
 C
 C----- spline loading DCp(x)
        CALL SEGSPL(YPADD,YPADDP,XPADD,NPADD)
@@ -482,49 +482,49 @@ C
        GO TO 200
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'MODC') THEN
-C----- Interactively modify camber
-       XBOX(1) = XMARG
-       XBOX(2) = XPAGE-XMARG
-       YBOX(1) = YMARG
-       YBOX(2) = YPAGE-YMARG
-       XOFF1 = XOFF
-       YOFF1 = YOFF+DYOFFC
-       XSF1 = XSF
-       YSF1 = YSF
-       CALL MODIFY(NTX,1,NCAM,1,1,
-     &             XCAM,YCAM,YCAMP, LCSLOP,
-     &             K1,K2,ISMOD,IFMOD,
-     &             XBOX,YBOX, XBOX,YBOX,SIZE,
-     &             XOFF1,YOFF1,XSF1,YSF1, 'RED',' ',
-     &             NEWPLOTC)
-       LDCPLOT = .FALSE.
-       GO TO 200
+!       ELSEIF(COMAND.EQ.'MODC') THEN
+! C----- Interactively modify camber
+!        XBOX(1) = XMARG
+!        XBOX(2) = XPAGE-XMARG
+!        YBOX(1) = YMARG
+!        YBOX(2) = YPAGE-YMARG
+!        XOFF1 = XOFF
+!        YOFF1 = YOFF+DYOFFC
+!        XSF1 = XSF
+!        YSF1 = YSF
+!        CALL MODIFY(NTX,1,NCAM,1,1,
+!      &             XCAM,YCAM,YCAMP, LCSLOP,
+!      &             K1,K2,ISMOD,IFMOD,
+!      &             XBOX,YBOX, XBOX,YBOX,SIZE,
+!      &             XOFF1,YOFF1,XSF1,YSF1, 'RED',' ',
+!      &             NEWPLOTC)
+!        LDCPLOT = .FALSE.
+!        GO TO 200
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'MODP') THEN
+!       ELSEIF(COMAND.EQ.'MODP') THEN
 C----- Interactively modify loading
-       IF(.NOT.LDCPLOT) THEN
-        LDCPLOT = .TRUE.
-        LGPARM = .NOT.LDCPLOT
-        CALL PLTINI
-        CALL PLOTG
-        CALL PLOTC
-       ENDIF
-       XBOX(1) = XMARG
-       XBOX(2) = XPAGE-XMARG
-       YBOX(1) = YMARG
-       YBOX(2) = YPAGE-YMARG
-       XOFF1 = XOFF
-       YOFF1 = (DYOFFP+YOFF)/YSFP
-       XSF1 = XSF
-       YSF1 = YSF*YSFP
-       CALL MODIFY(NTX,1,NCAM,1,1,
-     &             XCAM,PCAM,PCAMP, LCSLOP,
-     &             K1,K2,ISMOD,IFMOD,
-     &             XBOX,YBOX, XBOX,YBOX,SIZE,
-     &             XOFF1,YOFF1,XSF1,YSF1, 'RED',' ',
-     &             NEWPLOTC)
+!        IF(.NOT.LDCPLOT) THEN
+!         LDCPLOT = .TRUE.
+!         LGPARM = .NOT.LDCPLOT
+!         CALL PLTINI
+!         CALL PLOTG
+!         CALL PLOTC
+!        ENDIF
+!        XBOX(1) = XMARG
+!        XBOX(2) = XPAGE-XMARG
+!        YBOX(1) = YMARG
+!        YBOX(2) = YPAGE-YMARG
+!        XOFF1 = XOFF
+!        YOFF1 = (DYOFFP+YOFF)/YSFP
+!        XSF1 = XSF
+!        YSF1 = YSF*YSFP
+!        CALL MODIFY(NTX,1,NCAM,1,1,
+!      &             XCAM,PCAM,PCAMP, LCSLOP,
+!      &             K1,K2,ISMOD,IFMOD,
+!      &             XBOX,YBOX, XBOX,YBOX,SIZE,
+!      &             XOFF1,YOFF1,XSF1,YSF1, 'RED',' ',
+!      &             NEWPLOTC)
 C
 C----- calculate camber line corresponding to specified loading
        CALL CPCAM(NCAM,XCAM,YCAM,YCAMP,PCAM,PCAMP)
@@ -654,20 +654,20 @@ C--------------------------------------------------------
      &       COMAND.EQ.'B   ') THEN
        XWS = XWIND/SIZE
        YWS = YWIND/SIZE
-       CALL OFFGET(XOFF,YOFF,XSF,YSF,XWS,YWS, .TRUE. , .TRUE. )
+!        CALL OFFGET(XOFF,YOFF,XSF,YSF,XWS,YWS, .TRUE. , .TRUE. )
        SF = MIN(XSF,YSF)
        XSF = SF
        YSF = SF
        GO TO 300
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'RESE' .OR.
-     &       COMAND.EQ.'R   ') THEN
-       CALL PLTINI
-       CALL GOFINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'RESE' .OR.
+!      &       COMAND.EQ.'R   ') THEN
+!        CALL PLTINI
+!        CALL GOFINI
+!        CALL PLOTG
 cc       CALL RESETSCL
-       GO TO 300
+!        GO TO 300
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'DCPL') THEN
@@ -688,7 +688,7 @@ C--------------------------------------------------------
         CALL ASKR('Enter max DCp^',YPMX)
        ENDIF
        IF(YPMX-YPMN.GT.0.0) THEN
-        CALL AXISADJ(YPMN,YPMX,PSPAN,DXYP,NTICS)
+!         CALL AXISADJ(YPMN,YPMX,PSPAN,DXYP,NTICS)
         YPMIN = YPMN
         YPMAX = YPMX
         CALL GOFINI
@@ -708,18 +708,18 @@ C--------------------------------------------------------
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'ANNO') THEN
-       IF(LPLOT) THEN
-        CALL ANNOT(CH)
-       ELSE
-        WRITE(*,*) 'No active plot to annotate'
-       ENDIF
+!        IF(LPLOT) THEN
+!         CALL ANNOT(CH)
+!        ELSE
+!         WRITE(*,*) 'No active plot to annotate'
+!        ENDIF
        GO TO 300
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'HARD') THEN
-       IF(LPLOT) CALL PLEND
-       LPLOT = .FALSE.
-       CALL REPLOT(IDEVRP)
+!        IF(LPLOT) CALL PLEND
+!        LPLOT = .FALSE.
+!        CALL REPLOT(IDEVRP)
        GO TO 300
 C
 C-------------------------------------------------------
@@ -737,67 +737,67 @@ C
 
 
 
-      SUBROUTINE NEWPLOTC
-      CALL PLTINI
-      CALL PLOTG
-      CALL PLOTC
-      RETURN
-      END
+!       SUBROUTINE NEWPLOTC
+!       CALL PLTINI
+!       CALL PLOTG
+!       CALL PLOTC
+!       RETURN
+!       END
 
 
 
-      SUBROUTINE PLOTC
-C------------------------------------------------------
-C     Plots camber, thickness on its own axis above airfoil plot
-C     Also plots deltaCP distribution above the camber,thickness 
-C     on its own axis above airfoil plot if LDCPLOT is set
-C------------------------------------------------------
-      INCLUDE 'XFOIL.INC'
-C
-      DATA LMASK0, LMASK1, LMASK2, LMASK3 / -1, -32640, -30584, -21846 /
-C
-      CALL GETCOLOR(ICOL0)
-      CALL GETPAT(IPAT0)
-C
-      CHS = 0.6*CHG
-C
-      IF(LDCPLOT) THEN
-C----- current DCp loading is valid... plot it
-       CALL NEWPEN(1)
-       CHL = 1.5*CHG
-       YOFFP = (DYOFFP+YOFF)/YSFP
-       CALL GRDAIR(XGMIN,XGMAX,YPMIN,YPMAX,DXYG,DXYP,CHG,.FALSE.,.TRUE.,
-     &             XOFF,XSF,YOFFP,YSFP*YSF, LMASK2)
-C
-       CALL NEWCOLORNAME('RED')
-       CALL NEWPEN(2)
-       XLAB = (XPMIN         -XOFF )*XSF      - 4.0*CHL
-       YLAB = (YPMAX-0.5*DXYP-YOFFP)*YSFP*YSF - 0.6*CHL
-       CALL PLCHAR(XLAB,YLAB,CHL,' Cp',0.0,3)
-       CALL PLMATH(XLAB,YLAB,CHL,'O  ',0.0,3)
-C
-       CALL XYLINE(NCAM,XCAM,PCAM,XOFF,XSF,YOFFP,YSFP*YSF,1)
-ccc       CALL XYSYMB(NCAM,XCAM,PCAM,XOFF,XSF,YOFFP,YSFP*YSF,CHS,1)
-       CALL NEWCOLOR(ICOL0)
-C
-cC----- plot derived camber line in dotted line
-c       CALL NEWPAT(LMASK3)
-c      ELSE
-cC----- plot specified camber line in solid line
-c       CALL NEWPAT(LMASK0)
-      ENDIF
-C
-      CALL NEWPEN(1)
-      CALL NEWCOLORNAME('RED')
-      CALL XYLINE(NCAM,XCAM,YCAM,XOFF,XSF,YOFF+DYOFFC,YSF,1)
-ccc      CALL XYSYMB(NCAM,XCAM,YCAM,XOFF,XSF,YOFF+DYOFFC,YSF,CHS,1)
-C
-      CALL NEWCOLOR(ICOL0)
-      CALL NEWPAT(IPAT0)
-      CALL PLFLUSH
-C
-      RETURN
-      END ! PLOTC
+!       SUBROUTINE PLOTC
+! C------------------------------------------------------
+! C     Plots camber, thickness on its own axis above airfoil plot
+! C     Also plots deltaCP distribution above the camber,thickness 
+! C     on its own axis above airfoil plot if LDCPLOT is set
+! C------------------------------------------------------
+!       INCLUDE 'XFOIL.INC'
+! C
+!       DATA LMASK0, LMASK1, LMASK2, LMASK3 / -1, -32640, -30584, -21846 /
+! C
+!       CALL GETCOLOR(ICOL0)
+!       CALL GETPAT(IPAT0)
+! C
+!       CHS = 0.6*CHG
+! C
+!       IF(LDCPLOT) THEN
+! C----- current DCp loading is valid... plot it
+!        CALL NEWPEN(1)
+!        CHL = 1.5*CHG
+!        YOFFP = (DYOFFP+YOFF)/YSFP
+!        CALL GRDAIR(XGMIN,XGMAX,YPMIN,YPMAX,DXYG,DXYP,CHG,.FALSE.,.TRUE.,
+!      &             XOFF,XSF,YOFFP,YSFP*YSF, LMASK2)
+! C
+!        CALL NEWCOLORNAME('RED')
+!        CALL NEWPEN(2)
+!        XLAB = (XPMIN         -XOFF )*XSF      - 4.0*CHL
+!        YLAB = (YPMAX-0.5*DXYP-YOFFP)*YSFP*YSF - 0.6*CHL
+!        CALL PLCHAR(XLAB,YLAB,CHL,' Cp',0.0,3)
+!        CALL PLMATH(XLAB,YLAB,CHL,'O  ',0.0,3)
+! C
+!        CALL XYLINE(NCAM,XCAM,PCAM,XOFF,XSF,YOFFP,YSFP*YSF,1)
+! ccc       CALL XYSYMB(NCAM,XCAM,PCAM,XOFF,XSF,YOFFP,YSFP*YSF,CHS,1)
+!        CALL NEWCOLOR(ICOL0)
+! C
+! cC----- plot derived camber line in dotted line
+! c       CALL NEWPAT(LMASK3)
+! c      ELSE
+! cC----- plot specified camber line in solid line
+! c       CALL NEWPAT(LMASK0)
+!       ENDIF
+! C
+!       CALL NEWPEN(1)
+!       CALL NEWCOLORNAME('RED')
+!       CALL XYLINE(NCAM,XCAM,YCAM,XOFF,XSF,YOFF+DYOFFC,YSF,1)
+! ccc      CALL XYSYMB(NCAM,XCAM,YCAM,XOFF,XSF,YOFF+DYOFFC,YSF,CHS,1)
+! C
+!       CALL NEWCOLOR(ICOL0)
+!       CALL NEWPAT(IPAT0)
+!       CALL PLFLUSH
+! C
+!       RETURN
+!       END ! PLOTC
 
 
 
@@ -822,8 +822,8 @@ C
      &            EI11BT,EI22BT,APX1BT,APX2BT,
      &            THICKB,CAMBRB )
 C
-      CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-      CALL PLNEWP('magenta')
+!       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!       CALL PLNEWP('magenta')
 C
       LGEOPL = .FALSE.
 C

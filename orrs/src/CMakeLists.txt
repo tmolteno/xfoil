@@ -24,39 +24,39 @@ add_executable(osgen osgen.f io.f spline.f getarg0.f)
 
 add_executable(osgen1 osgen1.f io.f spline.f getarg0.f)
 
-if(OLD_PLOT_COMPATIBILITY_ROUTINES)
-  add_executable(fscorr fscorr.f fs.f plutil.f)
-  target_link_libraries(fscorr plt)
+# if(OLD_PLOT_COMPATIBILITY_ROUTINES)
+#   add_executable(fscorr fscorr.f fs.f plutil.f)
+#   target_link_libraries(fscorr plt)
+# 
+#   add_executable(fsrun fsrun.f fs.f)
+#   target_link_libraries(fsrun plt)
+# endif()
 
-  add_executable(fsrun fsrun.f fs.f)
-  target_link_libraries(fsrun plt)
-endif()
-
-add_executable(intai intai.f osmap.f plutil.f)
+add_executable(intai intai.f osmap.f )
 target_compile_definitions(intai PRIVATE "OSFILE_DIR=${ORRS_DIR}")
-target_link_libraries(intai plt)
+target_link_libraries(intai)
 
-if(OLD_PLOT_COMPATIBILITY_ROUTINES)
-  add_executable(mappl1 mappl1.f ask1.f conlab.f io.f getarg0.f)
-  target_link_libraries(mappl1 plt)
-
-  add_executable(ncorr ncorr.f fs.f plutil.f)
-  target_link_libraries(ncorr plt)
-endif()
+# if(OLD_PLOT_COMPATIBILITY_ROUTINES)
+#   add_executable(mappl1 mappl1.f ask1.f conlab.f io.f getarg0.f)
+#   target_link_libraries(mappl1 plt)
+# 
+#   add_executable(ncorr ncorr.f fs.f plutil.f)
+#   target_link_libraries(ncorr plt)
+# endif()
 
 add_executable(osrun osrun.f fs.f orrs.f ORRS.INC ospres.f OSPRES.INC
-  plutil.f userio.f)
-target_link_libraries(osrun plt)
+  userio.f)
+target_link_libraries(osrun)
 
 add_executable(osseq osseq.f fs.f orrs.f ORRS.INC ospres.f OSPRES.INC
-  plutil.f userio.f)
-target_link_libraries(osseq plt)
+   userio.f)
+target_link_libraries(osseq)
 
-add_executable(pfplot pfplot.f fs.f ask1.f)
-target_link_libraries(pfplot plt)
+# add_executable(pfplot pfplot.f fs.f ask1.f)
+# target_link_libraries(pfplot plt)
 
 add_executable(roll roll.f)
-target_link_libraries(roll plt)
+target_link_libraries(roll)
 
 add_executable(as2bi as2bi.f io.f getarg0.f)
 

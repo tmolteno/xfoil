@@ -31,7 +31,7 @@ C
       DIMENSION RINPUT(20)
       LOGICAL ERROR
 C
-      EXTERNAL NEWPLOTG
+!       EXTERNAL NEWPLOTG
 C
       SAVE COMOLD, ARGOLD
 C
@@ -51,9 +51,9 @@ C
       WRITE(*,*)
       WRITE(*,*) 'You are working with the buffer airfoil'
 C
-      CALL PLTINI
-      CALL GOFINI
-      CALL PLOTG
+!       CALL PLTINI
+!       CALL GOFINI
+!       CALL PLOTG
 C
 C====================================================
 C---- start of menu loop
@@ -84,7 +84,7 @@ C---- process previous command ?
 C
       IF(COMAND.EQ.'    ') THEN
 C----- just <return> was typed... clean up plotting and exit OPER
-       IF(LPLOT) CALL PLEND
+!        IF(LPLOT) CALL PLEND
        LPLOT = .FALSE.
        LGSYM = .FALSE.
        LGEOPL = .FALSE.
@@ -92,7 +92,7 @@ C----- just <return> was typed... clean up plotting and exit OPER
         WRITE(*,*)
         WRITE(*,*) 'Buffer airfoil is not identical to current airfoil'
        ENDIF
-       CALL CLRZOOM
+!        CALL CLRZOOM
        RETURN
       ENDIF
 C
@@ -160,14 +160,14 @@ C--------------------------------------------------------
 
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'Z   ') THEN
-       CALL USETZOOM(.TRUE.,.TRUE.)
-       CALL REPLOT(IDEV)
+!       ELSEIF(COMAND.EQ.'Z   ') THEN
+!        CALL USETZOOM(.TRUE.,.TRUE.)
+!        CALL REPLOT(IDEV)
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'U   ') THEN
-       CALL CLRZOOM
-       CALL REPLOT(IDEV)
+!       ELSEIF(COMAND.EQ.'U   ') THEN
+!        CALL CLRZOOM
+!        CALL REPLOT(IDEV)
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'GSET') THEN
@@ -187,8 +187,8 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-       CALL PLTINI
-       CALL PLOTG
+!        CALL PLTINI
+!        CALL PLOTG
        IF(LGSYM) CALL ZERCAM
 C
 C--------------------------------------------------------
@@ -239,9 +239,9 @@ C
        APX1BT = APX1BT - ARAD
        APX2BT = APX2BT - ARAD
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
 C
 C--------------------------------------------------------
@@ -265,9 +265,9 @@ C--------------------------------------------------------
          YB(I) = YB(I) + DELY
        ENDDO
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
@@ -325,9 +325,9 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
@@ -377,9 +377,9 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
@@ -405,9 +405,9 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
@@ -424,60 +424,60 @@ cc      ELSEIF(COMAND.EQ.'TC  ') THEN
 cc       CALL TCBUF
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'TCPL') THEN
-       LPLCAM = .NOT.LPLCAM
-       CALL PLTINI
-       CALL GOFINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'TCPL') THEN
+!        LPLCAM = .NOT.LPLCAM
+!        CALL PLTINI
+!        CALL GOFINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'TFAC') THEN
-       IF(.NOT.LPLCAM) THEN
-        WRITE(*,*) 'Enabling camber,thickness plotting'
-        LPLCAM = .TRUE.
-        CALL PLTINI
-        CALL GOFINI
-        CALL PLOTG
-       ENDIF
+!        IF(.NOT.LPLCAM) THEN
+!         WRITE(*,*) 'Enabling camber,thickness plotting'
+!         LPLCAM = .TRUE.
+!         CALL PLTINI
+!         CALL GOFINI
+!         CALL PLOTG
+!        ENDIF
        CALL TCSCAL(RINPUT,NINPUT)
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
-       CALL PLTCAM('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
+!        CALL PLTCAM('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'TSET') THEN
-       IF(.NOT.LPLCAM) THEN
-        WRITE(*,*) 'Enabling camber,thickness plotting'
-        LPLCAM = .TRUE.
-        CALL PLTINI
-        CALL GOFINI
-        CALL PLOTG
-       ENDIF
+!        IF(.NOT.LPLCAM) THEN
+!         WRITE(*,*) 'Enabling camber,thickness plotting'
+!         LPLCAM = .TRUE.
+!         CALL PLTINI
+!         CALL GOFINI
+!         CALL PLOTG
+!        ENDIF
        CALL TCSET(RINPUT,NINPUT)
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
-       CALL PLTCAM('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
+!        CALL PLTCAM('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'HIGH') THEN
-       IF(.NOT.LPLCAM) THEN
-        WRITE(*,*) 'Enabling camber,thickness plotting'
-        LPLCAM = .TRUE.
-        CALL PLTINI
-        CALL GOFINI
-        CALL PLOTG
-       ENDIF
+!        IF(.NOT.LPLCAM) THEN
+!         WRITE(*,*) 'Enabling camber,thickness plotting'
+!         LPLCAM = .TRUE.
+!         CALL PLTINI
+!         CALL GOFINI
+!         CALL PLOTG
+!        ENDIF
        CALL HIPNT(RINPUT,NINPUT)
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
-       CALL PLTCAM('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
+!        CALL PLTCAM('magenta')
        LGEOPL = .FALSE.
        LGSAME = .FALSE.
 C
@@ -589,9 +589,9 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
 C
        CALL CANG(XB,YB,NB,1, IMAX,AMAX)
 C
@@ -600,8 +600,8 @@ C--------------------------------------------------------
        CALL CLIS(XB,XBP,YB,YBP,SB,NB)
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'CPLO') THEN
-       CALL PLTCRV(SBLE,XB,XBP,YB,YBP,SB,NB,W1)
+!       ELSEIF(COMAND.EQ.'CPLO') THEN
+!        CALL PLTCRV(SBLE,XB,XBP,YB,YBP,SB,NB,W1)
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'FLAP' .OR.
@@ -612,10 +612,10 @@ C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'MODI' .OR.
      &       COMAND.EQ.'M   '      ) THEN
 C----- plot current geometry if it's not on the screen
-       IF(.NOT.LGEOPL) THEN
-        CALL PLTINI
-        CALL PLOTG
-       ENDIF
+!        IF(.NOT.LGEOPL) THEN
+!         CALL PLTINI
+!         CALL PLOTG
+!        ENDIF
 C
        IF(LGSYM) THEN
          DO I = 1, NB
@@ -632,12 +632,12 @@ C
        YBOX(1) = YMARG
        YBOX(2) = YPAGE-YMARG
        LMODPL = .FALSE.
-       CALL MODIXY(IBX,IBFRST,IBLAST,NSIDE,
-     &             XB,YB,XBP,YBP,SB, LGSLOP,
-     &             IGMOD1,IGMOD2,ISMOD,
-     &             XBOX,YBOX, XBOX,YBOX,SIZE,
-     &             XOFF,YOFF,XSF,YSF, LMODPL,
-     &             NEWPLOTG)
+!        CALL MODIXY(IBX,IBFRST,IBLAST,NSIDE,
+!      &             XB,YB,XBP,YBP,SB, LGSLOP,
+!      &             IGMOD1,IGMOD2,ISMOD,
+!      &             XBOX,YBOX, XBOX,YBOX,SIZE,
+!      &             XOFF,YOFF,XSF,YSF, LMODPL,
+!      &             NEWPLOTG)
 C
        IF(LGSYM) THEN
          DO I = 1, NB
@@ -660,9 +660,9 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-      CALL NEWPEN(2)
-      CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-      CALL PLNEWP('magenta')
+!       CALL NEWPEN(2)
+!       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!       CALL PLNEWP('magenta')
       LGEOPL = .FALSE.
 C
 C--------------------------------------------------------
@@ -686,8 +686,8 @@ C--------------------------------------------------------
 C
        XWS = XWIND/SIZE
        YWS = YWIND/SIZE
-       CALL POINTF(XB,XBP,YB,YBP,SB,NB, XWS,YWS, XOFF,YOFF,XSF,YSF,
-     &             IPNT,XC,YC)
+!        CALL POINTF(XB,XBP,YB,YBP,SB,NB, XWS,YWS, XOFF,YOFF,XSF,YSF,
+!      &             IPNT,XC,YC)
        IF(IPNT.EQ.0) GO TO 500
        IF(IPNT.EQ.1 .OR. IPNT.EQ.NB) THEN
         WRITE(*,*) 'Cannot double trailing edge point. No action taken.'
@@ -706,20 +706,20 @@ C----- spline new geometry
        CALL SCALC(XB,YB,SB,NB)
        CALL SEGSPL(XB,XBP,SB,NB)
        CALL SEGSPL(YB,YBP,SB,NB)
-       CALL PLTINI
-       CALL PLOTG
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'ADDP') THEN
-       CALL ADDP
+!       ELSEIF(COMAND.EQ.'ADDP') THEN
+!        CALL ADDP
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'DELP') THEN
-       CALL DELP
+!       ELSEIF(COMAND.EQ.'DELP') THEN
+!        CALL DELP
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'MOVP') THEN
-       CALL MOVP(NEWPLOTG)
+!       ELSEIF(COMAND.EQ.'MOVP') THEN
+!        CALL MOVP(NEWPLOTG)
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'UNIT') THEN
@@ -737,31 +737,31 @@ C
      &             EI11BT,EI22BT,APX1BT,APX2BT,
      &             THICKB,CAMBRB )
 C
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'DIST' .OR.
-     &       COMAND.EQ.'D   '      ) THEN
-       CALL DIST
+!       ELSEIF(COMAND.EQ.'DIST' .OR.
+!      &       COMAND.EQ.'D   '      ) THEN
+!        CALL DIST
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'HARD') THEN
-       IF(LPLOT) CALL PLEND
+!        IF(LPLOT) CALL PLEND
        LPLOT = .FALSE.
-       CALL REPLOT(IDEVRP)
+!        CALL REPLOT(IDEVRP)
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'PLOT' .OR.
-     &       COMAND.EQ.'P   '      ) THEN
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'PLOT' .OR.
+!      &       COMAND.EQ.'P   '      ) THEN
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'INPL') THEN
-       CALL PLTINI
+!        CALL PLTINI
        XOFF0 = XOFF
        YOFF0 = YOFF
        XSF0 = XSF
@@ -774,104 +774,104 @@ c       read (*,*) xoff, yoff
 c       xoff = -xoff
 c       yoff = -yoff
 c
-       CALL PLOTG
+!        CALL PLOTG
        XOFF = XOFF0
        YOFF = YOFF0
        XSF = XSF0
        YSF = YSF0
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'BLOW' .OR.
-     &       COMAND.EQ.'B   '      ) THEN
-       XWS = XWIND/SIZE
-       YWS = YWIND/SIZE
-       CALL OFFGET(XOFF,YOFF,XSF,YSF,XWS,YWS, .TRUE. , .TRUE. )
-       CALL GOFSET
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'BLOW' .OR.
+!      &       COMAND.EQ.'B   '      ) THEN
+!        XWS = XWIND/SIZE
+!        YWS = YWIND/SIZE
+!        CALL OFFGET(XOFF,YOFF,XSF,YSF,XWS,YWS, .TRUE. , .TRUE. )
+!        CALL GOFSET
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'RESE' .OR.
-     &       COMAND.EQ.'R   '      ) THEN
-       CALL PLTINI
-       CALL GOFINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'RESE' .OR.
+!      &       COMAND.EQ.'R   '      ) THEN
+!        CALL PLTINI
+!        CALL GOFINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'WIND' .OR.
-     &       COMAND.EQ.'W   '      ) THEN
-       XWS = XWIND/SIZE
-       YWS = YWIND/SIZE
-C
-       WRITE(*,*) ' '
-       WRITE(*,*) 'Type I,O,P to In,Out,Pan with cursor...'
-C
- 80    CALL PLTINI
-       CALL PLOTG
-C
-       CALL GETCURSORXY(XCRS,YCRS,CHKEY)
-C
-C----- do possible pan,zoom operations based on CHKEY
-       CALL KEYOFF(XCRS,YCRS,CHKEY, XWS,YWS, XOFF,YOFF,XSF,YSF, LPLNEW)
-C
-       IF(LPLNEW) THEN
-        CALL GOFSET
-        GO TO 80
-       ENDIF
-C
-C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'TSIZ') THEN
-       IF(NINPUT.GE.1) THEN
-        GTICK = RINPUT(1)
-       ELSE
-        WRITE(*,*)
-     &    'Current tick-mark size (as fraction of perimeter) =', GTICK
-        CALL ASKR('Enter new tick-mark size^',GTICK)
-       ENDIF
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'WIND' .OR.
+!      &       COMAND.EQ.'W   '      ) THEN
+!        XWS = XWIND/SIZE
+!        YWS = YWIND/SIZE
+! C
+!        WRITE(*,*) ' '
+!        WRITE(*,*) 'Type I,O,P to In,Out,Pan with cursor...'
+! C
+!  80    CALL PLTINI
+!        CALL PLOTG
+! C
+!        CALL GETCURSORXY(XCRS,YCRS,CHKEY)
+! C
+! C----- do possible pan,zoom operations based on CHKEY
+!        CALL KEYOFF(XCRS,YCRS,CHKEY, XWS,YWS, XOFF,YOFF,XSF,YSF, LPLNEW)
+! C
+!        IF(LPLNEW) THEN
+!         CALL GOFSET
+!         GO TO 80
+!        ENDIF
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'TICK') THEN
-       LGTICK = .NOT.LGTICK
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'TSIZ') THEN
+!        IF(NINPUT.GE.1) THEN
+!         GTICK = RINPUT(1)
+!        ELSE
+!         WRITE(*,*)
+!      &    'Current tick-mark size (as fraction of perimeter) =', GTICK
+!         CALL ASKR('Enter new tick-mark size^',GTICK)
+!        ENDIF
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'GRID') THEN
-       LGGRID = .NOT.LGGRID
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'TICK') THEN
+!        LGTICK = .NOT.LGTICK
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'GPAR') THEN
-       LGPARM = .NOT.LGPARM
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'GRID') THEN
+!        LGGRID = .NOT.LGGRID
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'SIZE') THEN
-       IF(NINPUT.GE.1) THEN
-        SIZE = RINPUT(1)
-       ELSE
-        WRITE(*,*) 'Current plot-object size =', SIZE
-        CALL ASKR('Enter new plot-object size^',SIZE)
-       ENDIF
-       CALL PLTINI
-       CALL PLOTG
+!       ELSEIF(COMAND.EQ.'GPAR') THEN
+!        LGPARM = .NOT.LGPARM
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'OVER' .OR.
-     &       COMAND.EQ.'O   '      ) THEN
-       CALL OVER(COMARG)
+!       ELSEIF(COMAND.EQ.'SIZE') THEN
+!        IF(NINPUT.GE.1) THEN
+!         SIZE = RINPUT(1)
+!        ELSE
+!         WRITE(*,*) 'Current plot-object size =', SIZE
+!         CALL ASKR('Enter new plot-object size^',SIZE)
+!        ENDIF
+!        CALL PLTINI
+!        CALL PLOTG
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'ANNO') THEN
-       IF(LPLOT) THEN
-        CALL ANNOT(CH)
-       ELSE
-        WRITE(*,*) 'No active plot to annotate'
-       ENDIF
+!       ELSEIF(COMAND.EQ.'OVER' .OR.
+!      &       COMAND.EQ.'O   '      ) THEN
+!        CALL OVER(COMARG)
+C
+C--------------------------------------------------------
+!       ELSEIF(COMAND.EQ.'ANNO') THEN
+!        IF(LPLOT) THEN
+!         CALL ANNOT(CH)
+!        ELSE
+!         WRITE(*,*) 'No active plot to annotate'
+!        ENDIF
 C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'NAME') THEN
@@ -895,10 +895,10 @@ C
 C--------------------------------------------------------
       ELSEIF(COMAND.EQ.'SINT') THEN
        CALL SPLNXY(XB,XBP,YB,YBP,SB,NB)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'cyan')
-       CALL NEWPEN(2)
-       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-       CALL PLNEWP('magenta')
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'cyan')
+!        CALL NEWPEN(2)
+!        CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!        CALL PLNEWP('magenta')
        LGEOPL = .FALSE.
 C
 C--------------------------------------------------------
@@ -912,12 +912,12 @@ C
       END ! GDES
 
 
-      SUBROUTINE NEWPLOTG
-      CALL GOFSET
-      CALL PLTINI
-      CALL PLOTG
-      RETURN
-      END
+!       SUBROUTINE NEWPLOTG
+!       CALL GOFSET
+!       CALL PLTINI
+!       CALL PLOTG
+!       RETURN
+!       END
 
 
       SUBROUTINE ABCOPY(LCONF)
@@ -1034,8 +1034,8 @@ C
       YRANGE = YBMAX - YBMIN
 C
 C---- set x,y scaling factors needed for O(1) size plot with "nice" limits
-      CALL SCALIT(1,0.95*XRANGE,0.0,XSF)
-      CALL SCALIT(1,0.95*YRANGE,0.0,YSF)
+!       CALL SCALIT(1,0.95*XRANGE,0.0,XSF)
+!       CALL SCALIT(1,0.95*YRANGE,0.0,YSF)
 C  
 C---- grid increment as a fraction of a nice upper bound on delta x
 cc      DXYG = 0.1 / XSF
@@ -1101,7 +1101,7 @@ C---- set plot limits for DCp plot (y-axis limit defaults set in INIT)
       XPMIN = XGMIN
       XPMAX = XGMAX
 ccc      DXYP = DXYG
-      CALL AXISADJ(YPMIN,YPMAX,PSPAN,DXYP,NTICS)
+!       CALL AXISADJ(YPMIN,YPMAX,PSPAN,DXYP,NTICS)
 C
 C---- set Yoffset for camber plot in scale factor YSF for geom plots
       DYOFFC = - YGMAX + YCMIN - 2.2*CHG/YSF
@@ -1154,8 +1154,8 @@ C---- crunch down onto airfoil limits
       YG2 = MIN(YG2,YBMAX)
 C
 C---- set x,y scaling factors needed for O(1) size plot with "nice" limits
-      CALL SCALIT(1,0.95*(XG2-XG1),0.0,GXSF)
-      CALL SCALIT(1,0.95*(YG2-YG1),0.0,GYSF)
+!       CALL SCALIT(1,0.95*(XG2-XG1),0.0,GXSF)
+!       CALL SCALIT(1,0.95*(YG2-YG1),0.0,GYSF)
 C  
       GSF = GXSF
 ccc   GSF = MIN(GXSF,GYSF)
@@ -1258,8 +1258,8 @@ C
      &            EI11BT,EI22BT,APX1BT,APX2BT,
      &            THICKB,CAMBRB )
 C
-      CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-      CALL PLNEWP('magenta')
+!       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!       CALL PLNEWP('magenta')
 C
       LGEOPL = .FALSE.
 C
@@ -1323,8 +1323,8 @@ C
       WRITE(*,1000) RADIUS
  1000 FORMAT(/' New LE radius = ',F7.5)
 C
-      CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-      CALL PLNEWP('magenta')
+!       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!       CALL PLNEWP('magenta')
 C
       LGEOPL = .FALSE.
 C
@@ -1764,46 +1764,46 @@ C
       ENDIF
 C
 C
-      IF(.NOT.LPLOT) THEN
-       CALL PLTINI
-      ENDIF
+!       IF(.NOT.LPLOT) THEN
+!        CALL PLTINI
+!       ENDIF
 C
 C---- save current color and set new color
-      CALL GETCOLOR(ICOL0)
+!       CALL GETCOLOR(ICOL0)
 C
-      CALL NEWCOLORNAME('green')
-      CALL PLOT((XBF-XOFF)*XSF,(YBF-YOFF)*YSF,3)
-      CALL PLOT((XT1-XOFF)*XSF,(YT1-YOFF)*YSF,2)
-      CALL PLOT((XBF-XOFF)*XSF,(YBF-YOFF)*YSF,3)
-      CALL PLOT((XB1-XOFF)*XSF,(YB1-YOFF)*YSF,2)
+!       CALL NEWCOLORNAME('green')
+!       CALL PLOT((XBF-XOFF)*XSF,(YBF-YOFF)*YSF,3)
+!       CALL PLOT((XT1-XOFF)*XSF,(YT1-YOFF)*YSF,2)
+!       CALL PLOT((XBF-XOFF)*XSF,(YBF-YOFF)*YSF,3)
+!       CALL PLOT((XB1-XOFF)*XSF,(YB1-YOFF)*YSF,2)
+! C
+!       IF(ATOP .EQ. 0.0) THEN
+!         XBAR = XT1 - XBF
+!         YBAR = YT1 - YBF
+!         XT1C = XBF  +  XBAR*COSD + YBAR*SIND
+!         YT1C = YBF  -  XBAR*SIND + YBAR*COSD
+!         CALL PLOT((XBF -XOFF)*XSF,(YBF -YOFF)*YSF,3)
+!         CALL PLOT((XT1C-XOFF)*XSF,(YT1C-YOFF)*YSF,2)
+!       ENDIF
+! C
+!       IF(ABOT .EQ. 0.0) THEN
+!         XBAR = XB1 - XBF
+!         YBAR = YB1 - YBF
+!         XB1C = XBF  +  XBAR*COSD + YBAR*SIND
+!         YB1C = YBF  -  XBAR*SIND + YBAR*COSD
+!         CALL PLOT((XBF -XOFF)*XSF,(YBF -YOFF)*YSF,3)
+!         CALL PLOT((XB1C-XOFF)*XSF,(YB1C-YOFF)*YSF,2)
+!       ENDIF
+! C
+!       CALL NEWCOLORNAME('red')
+!       CALL PLSYMB((XBF-XOFF)*XSF,(YBF-YOFF)*YSF,0.5*SHT,1,0.0,0)
 C
-      IF(ATOP .EQ. 0.0) THEN
-        XBAR = XT1 - XBF
-        YBAR = YT1 - YBF
-        XT1C = XBF  +  XBAR*COSD + YBAR*SIND
-        YT1C = YBF  -  XBAR*SIND + YBAR*COSD
-        CALL PLOT((XBF -XOFF)*XSF,(YBF -YOFF)*YSF,3)
-        CALL PLOT((XT1C-XOFF)*XSF,(YT1C-YOFF)*YSF,2)
-      ENDIF
-C
-      IF(ABOT .EQ. 0.0) THEN
-        XBAR = XB1 - XBF
-        YBAR = YB1 - YBF
-        XB1C = XBF  +  XBAR*COSD + YBAR*SIND
-        YB1C = YBF  -  XBAR*SIND + YBAR*COSD
-        CALL PLOT((XBF -XOFF)*XSF,(YBF -YOFF)*YSF,3)
-        CALL PLOT((XB1C-XOFF)*XSF,(YB1C-YOFF)*YSF,2)
-      ENDIF
-C
-      CALL NEWCOLORNAME('red')
-      CALL PLSYMB((XBF-XOFF)*XSF,(YBF-YOFF)*YSF,0.5*SHT,1,0.0,0)
-C
-      CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
-      CALL PLNEWP('magenta')
+!       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'magenta')
+!       CALL PLNEWP('magenta')
 C
       LGEOPL = .FALSE.
 C
-      CALL NEWCOLOR(ICOL0)
+!       CALL NEWCOLOR(ICOL0)
       RETURN
       END ! FLAP
 
@@ -1868,226 +1868,226 @@ C
 
 
 
-      SUBROUTINE PLOTG
-C--------------------------------------------------------------
-C     Plots buffer airfoil with ticked chord line or grid
-C--------------------------------------------------------------
-      INCLUDE 'XFOIL.INC'
-C
-      DATA LMASK1, LMASK2, LMASK3 / -32640, -30584, -21846 /
-      INCLUDE 'XDES.INC'
-C
-C---- node tick mark size and corner symbol size
-      DTICK = GTICK*(SB(NB)-SB(1))
-      SSH   = DTICK * 3.0
-C
-      CALL NCALC(XB,YB,SB,NB,W1,W2)
-C
-      IF(LGGRID) THEN
-        CALL GRDAIR(XGMIN,XGMAX,YGMIN,YGMAX,DXYG,DXYG,CHG,.TRUE.,.TRUE.,
-     &              XOFF,XSF,YOFF,YSF, LMASK2)
-        XL0 = XMOD(XGMIN)
-        YL0 = YMOD(YGMAX) + 2.0*CH
-      ELSE
-C------ plot chord line and tick marks every 10% chord
-        CALL NEWPEN(1)
-        CALL PLOT(XMOD(0.0),YMOD(0.0),3)
-        CALL PLOT(XMOD(1.0),YMOD(0.0),2)
-        DO ITICK=1, 10
-          XPLT = FLOAT(ITICK)/10.0
-          CALL PLOT(XMOD(XPLT),YMOD(0.003),3)
-          CALL PLOT(XMOD(XPLT),YMOD(-.003),2)
-        ENDDO
-C
-        XL0 = XMOD(XBMIN)
-        YL0 = YMOD(YBMAX) + 2.0*CH
-      ENDIF
-      IF(LPLCAM)  YL0 = YSF*(YCMAX-DYOFFC-YOFF) + 2.0*CH
-C
-      CALL PLFLUSH
-C
-      CALL NEWPEN(2)
-      CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'black')
-C
-      IF(LGTICK) THEN
-C----- draw tiny tick mark normal to airfoil surface at each panel node
-       DO I=2, NB-1
-         CALL PLOT(XMOD(XB(I)            ),YMOD(YB(I)            ),3)
-         CALL PLOT(XMOD(XB(I)-DTICK*W1(I)),YMOD(YB(I)-DTICK*W2(I)),2)
-       ENDDO
-      ENDIF
-c
-cC---- plot symbol at nose
-c      CALL NSFIND(STLE,XB,XBP,YB,YBP,SB,NB)
-c      XT = SEVAL(STLE,XB,XBP,SB,NB)
-c      YT = SEVAL(STLE,YB,YBP,SB,NB)
-c      CALL PLSYMB(XMOD(XT),YMOD(YT),0.005*XSF,5,0.0,0)
-c
-C---- put symbol at any doubled point
-      DO I=1, NB-1
-        IF(SB(I) .EQ. SB(I+1))
-     &     CALL PLSYMB(XMOD(XB(I)),YMOD(YB(I)),SSH,5,0.0,0)
-      ENDDO
-C
-      IF(LPLCAM) THEN
-       CALL PLTCAM(' ')
-      ENDIF
-C
-      IF(LGPARM) THEN
-       CALL NEWPEN(3)
-       CALL GPARPL(XL0,YL0,0.7*CH,.TRUE.,NAME,
-     &             CHORDB,AREAB,RADBLE,ANGBTE,
-     &             EI11BA,EI22BA,APX1BA,APX2BA,
-     &             EI11BT,EI22BT,APX1BT,APX2BT,
-     &             THICKB,CAMBRB)
-      ENDIF
-C
-      CALL PLFLUSH
-C
-      LGEOPL = .TRUE.
-      NOVER = 0
-C
-      RETURN
-      END ! PLOTG
+!       SUBROUTINE PLOTG
+! C--------------------------------------------------------------
+! C     Plots buffer airfoil with ticked chord line or grid
+! C--------------------------------------------------------------
+!       INCLUDE 'XFOIL.INC'
+! C
+!       DATA LMASK1, LMASK2, LMASK3 / -32640, -30584, -21846 /
+!       INCLUDE 'XDES.INC'
+! C
+! C---- node tick mark size and corner symbol size
+!       DTICK = GTICK*(SB(NB)-SB(1))
+!       SSH   = DTICK * 3.0
+! C
+!       CALL NCALC(XB,YB,SB,NB,W1,W2)
+! C
+!       IF(LGGRID) THEN
+!         CALL GRDAIR(XGMIN,XGMAX,YGMIN,YGMAX,DXYG,DXYG,CHG,.TRUE.,.TRUE.,
+!      &              XOFF,XSF,YOFF,YSF, LMASK2)
+!         XL0 = XMOD(XGMIN)
+!         YL0 = YMOD(YGMAX) + 2.0*CH
+!       ELSE
+! C------ plot chord line and tick marks every 10% chord
+! !         CALL NEWPEN(1)
+! !         CALL PLOT(XMOD(0.0),YMOD(0.0),3)
+! !         CALL PLOT(XMOD(1.0),YMOD(0.0),2)
+! !         DO ITICK=1, 10
+! !           XPLT = FLOAT(ITICK)/10.0
+! !           CALL PLOT(XMOD(XPLT),YMOD(0.003),3)
+! !           CALL PLOT(XMOD(XPLT),YMOD(-.003),2)
+! !         ENDDO
+! C
+!         XL0 = XMOD(XBMIN)
+!         YL0 = YMOD(YBMAX) + 2.0*CH
+!       ENDIF
+!       IF(LPLCAM)  YL0 = YSF*(YCMAX-DYOFFC-YOFF) + 2.0*CH
+! C
+! !       CALL PLFLUSH
+! C
+! !       CALL NEWPEN(2)
+! !       CALL PLTAIR(XB,XBP,YB,YBP,SB,NB, XOFF,XSF,YOFF,YSF,'black')
+! C
+! !       IF(LGTICK) THEN
+! ! C----- draw tiny tick mark normal to airfoil surface at each panel node
+! !        DO I=2, NB-1
+! !          CALL PLOT(XMOD(XB(I)            ),YMOD(YB(I)            ),3)
+! !          CALL PLOT(XMOD(XB(I)-DTICK*W1(I)),YMOD(YB(I)-DTICK*W2(I)),2)
+! !        ENDDO
+! !       ENDIF
+! c
+! cC---- plot symbol at nose
+! c      CALL NSFIND(STLE,XB,XBP,YB,YBP,SB,NB)
+! c      XT = SEVAL(STLE,XB,XBP,SB,NB)
+! c      YT = SEVAL(STLE,YB,YBP,SB,NB)
+! c      CALL PLSYMB(XMOD(XT),YMOD(YT),0.005*XSF,5,0.0,0)
+! c
+! C---- put symbol at any doubled point
+! !       DO I=1, NB-1
+! !         IF(SB(I) .EQ. SB(I+1))
+! !      &     CALL PLSYMB(XMOD(XB(I)),YMOD(YB(I)),SSH,5,0.0,0)
+! !       ENDDO
+! C
+!       IF(LPLCAM) THEN
+!        CALL PLTCAM(' ')
+!       ENDIF
+! C
+!       IF(LGPARM) THEN
+! !        CALL NEWPEN(3)
+!        CALL GPARPL(XL0,YL0,0.7*CH,.TRUE.,NAME,
+!      &             CHORDB,AREAB,RADBLE,ANGBTE,
+!      &             EI11BA,EI22BA,APX1BA,APX2BA,
+!      &             EI11BT,EI22BT,APX1BT,APX2BT,
+!      &             THICKB,CAMBRB)
+!       ENDIF
+! C
+! !       CALL PLFLUSH
+! C
+!       LGEOPL = .TRUE.
+!       NOVER = 0
+! C
+!       RETURN
+!       END ! PLOTG
+! 
+
+
+!       SUBROUTINE PLTCAM(COLIN)
+! C--------------------------------------------
+! C     Plots camber & thickness distributions
+! C--------------------------------------------
+!       INCLUDE 'XFOIL.INC'
+!       CHARACTER*(*) COLIN
+!       CHARACTER*32 COLC, COLT
+!       DATA LMASK1, LMASK2, LMASK3 / -32640, -30584, -21846 /
+! C
+! C---- plot camber/thickness only if camber/tickness plot is being shown
+!       IF(.NOT.LPLCAM) RETURN
+! C
+!       CALL NEWPEN(1)
+!       CALL GRDAIR(XGMIN,XGMAX,YCMIN,YCMAX,DXYG,DXYG,CHG,.FALSE.,.TRUE.,
+!      &            XOFF,XSF,DYOFFC+YOFF,YSF, LMASK2)
+! C     
+!       CALL GETCAM(XCM,YCM,NCM,XTK,YTK,NTK,
+!      &            XB,XBP,YB,YBP,SB,NB )
+!       CALL SCALC(XCM,YCM,SCM,NCM)
+!       CALL SEGSPL(XCM,XCMP,SCM,NCM)
+!       CALL SEGSPL(YCM,YCMP,SCM,NCM)
+!       CALL SCALC(XTK,YTK,STK,NTK)
+!       CALL SEGSPL(XTK,XTKP,STK,NTK)
+!       CALL SEGSPL(YTK,YTKP,STK,NTK)
+! C
+!       IF(COLIN(1:1) .EQ. ' ') THEN
+!        COLC = 'green'
+!        COLT = 'cyan'
+!       ELSE
+!        COLC = COLIN
+!        COLT = COLIN
+!       ENDIF
+! C
+!       CALL NEWPEN(2)
+!       YOF = YOFF + DYOFFC
+!       CALL PLTAIR(XTK,XTKP,YTK,YTKP,STK,NTK,XOFF,XSF, YOF, YSF,COLT)
+!       CALL PLTAIR(XTK,XTKP,YTK,YTKP,STK,NTK,XOFF,XSF,-YOF,-YSF,COLT)
+! C--- Offset for camber includes offset for LE camber point
+!       YOFF1C = YOFF + DYOFFC + YCM(1)
+!       CALL PLTAIR(XCM,XCMP,YCM,YCMP,SCM,NCM,XOFF,XSF, YOFF1C,YSF,COLC)
+! C
+!       RETURN
+!       END ! PLTCAM
+! 
+! 
+!       SUBROUTINE PLNEWP(COLOR)
+!       INCLUDE 'XFOIL.INC'
+!       CHARACTER*(*) COLOR
+! C
+!       INCLUDE 'XDES.INC'
+! C
+! C---- don't plot geometric parameters if camber/tickness plot is being shown
+!       IF(LPLCAM) RETURN
+! C
+!       CALL GETCOLOR(ICOL0)
+! C
+!       CALL NEWCOLORNAME(COLOR)
+!       CALL NEWPEN(3)
+! C
+!       NOVER = NOVER + 1
+!       IF(LGGRID) THEN
+!        XL0 = XMOD(XGMIN) +  2.0*CH + 9.0*CH*FLOAT(NOVER)
+!        YL0 = YMOD(YGMAX) +  2.0*CH
+!       ELSE
+!        XL0 = XMOD(XBMIN) +  2.0*CH + 9.0*CH*FLOAT(NOVER)
+!        YL0 = YMOD(YBMAX) +  2.0*CH
+!       ENDIF
+!       
+!       IF(LPLCAM)  YL0 = YSF*(YCMAX-YOFF-DYOFFC) + 2.0*CH
+! C
+!       IF(LGPARM) THEN
+!         CALL GPARPL(XL0,YL0,0.7*CH,.FALSE.,NAME,
+!      &              CHORDB,AREAB,RADBLE,ANGBTE,
+!      &              EI11BA,EI22BA,APX1BA,APX2BA,
+!      &              EI11BT,EI22BT,APX1BT,APX2BT,
+!      &              THICKB,CAMBRB)
+!       ENDIF
+! C
+!       CALL NEWCOLOR(ICOL0)
+!       CALL PLFLUSH
+! C
+!       RETURN
+!       END ! PLNEWP
 
 
 
-      SUBROUTINE PLTCAM(COLIN)
-C--------------------------------------------
-C     Plots camber & thickness distributions
-C--------------------------------------------
-      INCLUDE 'XFOIL.INC'
-      CHARACTER*(*) COLIN
-      CHARACTER*32 COLC, COLT
-      DATA LMASK1, LMASK2, LMASK3 / -32640, -30584, -21846 /
-C
-C---- plot camber/thickness only if camber/tickness plot is being shown
-      IF(.NOT.LPLCAM) RETURN
-C
-      CALL NEWPEN(1)
-      CALL GRDAIR(XGMIN,XGMAX,YCMIN,YCMAX,DXYG,DXYG,CHG,.FALSE.,.TRUE.,
-     &            XOFF,XSF,DYOFFC+YOFF,YSF, LMASK2)
-C     
-      CALL GETCAM(XCM,YCM,NCM,XTK,YTK,NTK,
-     &            XB,XBP,YB,YBP,SB,NB )
-      CALL SCALC(XCM,YCM,SCM,NCM)
-      CALL SEGSPL(XCM,XCMP,SCM,NCM)
-      CALL SEGSPL(YCM,YCMP,SCM,NCM)
-      CALL SCALC(XTK,YTK,STK,NTK)
-      CALL SEGSPL(XTK,XTKP,STK,NTK)
-      CALL SEGSPL(YTK,YTKP,STK,NTK)
-C
-      IF(COLIN(1:1) .EQ. ' ') THEN
-       COLC = 'green'
-       COLT = 'cyan'
-      ELSE
-       COLC = COLIN
-       COLT = COLIN
-      ENDIF
-C
-      CALL NEWPEN(2)
-      YOF = YOFF + DYOFFC
-      CALL PLTAIR(XTK,XTKP,YTK,YTKP,STK,NTK,XOFF,XSF, YOF, YSF,COLT)
-      CALL PLTAIR(XTK,XTKP,YTK,YTKP,STK,NTK,XOFF,XSF,-YOF,-YSF,COLT)
-C--- Offset for camber includes offset for LE camber point
-      YOFF1C = YOFF + DYOFFC + YCM(1)
-      CALL PLTAIR(XCM,XCMP,YCM,YCMP,SCM,NCM,XOFF,XSF, YOFF1C,YSF,COLC)
-C
-      RETURN
-      END ! PLTCAM
-
-
-      SUBROUTINE PLNEWP(COLOR)
-      INCLUDE 'XFOIL.INC'
-      CHARACTER*(*) COLOR
-C
-      INCLUDE 'XDES.INC'
-C
-C---- don't plot geometric parameters if camber/tickness plot is being shown
-      IF(LPLCAM) RETURN
-C
-      CALL GETCOLOR(ICOL0)
-C
-      CALL NEWCOLORNAME(COLOR)
-      CALL NEWPEN(3)
-C
-      NOVER = NOVER + 1
-      IF(LGGRID) THEN
-       XL0 = XMOD(XGMIN) +  2.0*CH + 9.0*CH*FLOAT(NOVER)
-       YL0 = YMOD(YGMAX) +  2.0*CH
-      ELSE
-       XL0 = XMOD(XBMIN) +  2.0*CH + 9.0*CH*FLOAT(NOVER)
-       YL0 = YMOD(YBMAX) +  2.0*CH
-      ENDIF
-      
-      IF(LPLCAM)  YL0 = YSF*(YCMAX-YOFF-DYOFFC) + 2.0*CH
-C
-      IF(LGPARM) THEN
-        CALL GPARPL(XL0,YL0,0.7*CH,.FALSE.,NAME,
-     &              CHORDB,AREAB,RADBLE,ANGBTE,
-     &              EI11BA,EI22BA,APX1BA,APX2BA,
-     &              EI11BT,EI22BT,APX1BT,APX2BT,
-     &              THICKB,CAMBRB)
-      ENDIF
-C
-      CALL NEWCOLOR(ICOL0)
-      CALL PLFLUSH
-C
-      RETURN
-      END ! PLNEWP
-
-
-
-      SUBROUTINE GPARPL(X0,Y0,CH, LABEL, NAME,
-     &                  CHORD,AREA,RADLE,ANGTE,
-     &                  EI11A,EI22A,APX1A,APX2A,
-     &                  EI11T,EI22T,APX1T,APX2T,
-     &                  THICK,CAMBR)
-      LOGICAL LABEL
-      EXTERNAL PLCHAR
-      CHARACTER NAME*(*)
-C
-      RTD = 45.0/ATAN(1.0)
-C
-      XSPACE = 30.0*CH
-      YSPACE =  2.0*CH
-C
-      X = X0
-      Y = Y0
-C
-      IF(LABEL) THEN
-       CALL PLCHAR(X,Y,CH,'       = ',0.0, 9)
-       CALL PLMATH(X,Y,CH,'  Oq     ',0.0, 9)
-       CALL PLSUBS(X+3.0*CH,Y,CH,'TE',0.0, 2, PLCHAR)
-      ENDIF
-      CALL PLNUMB(X+9.0*CH,Y,CH,ANGTE*RTD        ,0.0, 2)
-      CALL PLMATH(999.,Y,CH,'"'              ,0.0, 1)
-      Y = Y + YSPACE
-C
-      IF(LABEL) THEN
-       CALL PLCHAR(X,Y,CH,'   r   = ',0.0, 9)
-       CALL PLSUBS(X+3.0*CH,Y,CH,'LE',0.0, 2, PLCHAR)
-      ENDIF
-      CALL PLNUMB(X+9.0*CH,Y,CH,RADLE,0.0, 5)
-      Y = Y + YSPACE
-C
-      IF(LABEL) THEN
-       CALL PLCHAR(X,Y,CH,'camber = ',0.0, 9)
-      ENDIF
-      CALL PLNUMB(X+9.0*CH,Y,CH,CAMBR,0.0, 5)
-      Y = Y + YSPACE
-C
-      IF(LABEL) THEN
-       CALL PLCHAR(X,Y,CH,'thick. = ',0.0, 9)
-      ENDIF
-      CALL PLNUMB(X+9.0*CH,Y,CH,THICK,0.0, 5)
-      Y = Y + YSPACE
-C
-      IF(LABEL) THEN
-       CALL PLCHAR(X,Y,CH,' area  = ',0.0, 9)
-      ENDIF
-      CALL PLNUMB(X+9.0*CH,Y,CH, AREA,0.0, 5)
-      Y = Y + YSPACE
+!       SUBROUTINE GPARPL(X0,Y0,CH, LABEL, NAME,
+!      &                  CHORD,AREA,RADLE,ANGTE,
+!      &                  EI11A,EI22A,APX1A,APX2A,
+!      &                  EI11T,EI22T,APX1T,APX2T,
+!      &                  THICK,CAMBR)
+!       LOGICAL LABEL
+!       EXTERNAL PLCHAR
+!       CHARACTER NAME*(*)
+! C
+!       RTD = 45.0/ATAN(1.0)
+! C
+!       XSPACE = 30.0*CH
+!       YSPACE =  2.0*CH
+! C
+!       X = X0
+!       Y = Y0
+! C
+!       IF(LABEL) THEN
+!        CALL PLCHAR(X,Y,CH,'       = ',0.0, 9)
+!        CALL PLMATH(X,Y,CH,'  Oq     ',0.0, 9)
+!        CALL PLSUBS(X+3.0*CH,Y,CH,'TE',0.0, 2, PLCHAR)
+!       ENDIF
+!       CALL PLNUMB(X+9.0*CH,Y,CH,ANGTE*RTD        ,0.0, 2)
+!       CALL PLMATH(999.,Y,CH,'"'              ,0.0, 1)
+!       Y = Y + YSPACE
+! C
+!       IF(LABEL) THEN
+!        CALL PLCHAR(X,Y,CH,'   r   = ',0.0, 9)
+!        CALL PLSUBS(X+3.0*CH,Y,CH,'LE',0.0, 2, PLCHAR)
+!       ENDIF
+!       CALL PLNUMB(X+9.0*CH,Y,CH,RADLE,0.0, 5)
+!       Y = Y + YSPACE
+! C
+!       IF(LABEL) THEN
+!        CALL PLCHAR(X,Y,CH,'camber = ',0.0, 9)
+!       ENDIF
+!       CALL PLNUMB(X+9.0*CH,Y,CH,CAMBR,0.0, 5)
+!       Y = Y + YSPACE
+! C
+!       IF(LABEL) THEN
+!        CALL PLCHAR(X,Y,CH,'thick. = ',0.0, 9)
+!       ENDIF
+!       CALL PLNUMB(X+9.0*CH,Y,CH,THICK,0.0, 5)
+!       Y = Y + YSPACE
+! C
+!       IF(LABEL) THEN
+!        CALL PLCHAR(X,Y,CH,' area  = ',0.0, 9)
+!       ENDIF
+!       CALL PLNUMB(X+9.0*CH,Y,CH, AREA,0.0, 5)
+!       Y = Y + YSPACE
 C
 C
 c      X = X0  +  XSPACE
@@ -2121,194 +2121,194 @@ c      CALL PLNUMB(999.,Y,CH, AREA,0.0, 5)
 c      Y = Y + YSPACE
 C
 C--- Plot airfoil name over data list
-      CALL PLCHAR(X+9.0*CH,Y,CH,NAME,0.0, 12)
-C
-      RETURN
-      END ! GPARPL
+!       CALL PLCHAR(X+9.0*CH,Y,CH,NAME,0.0, 12)
+! C
+!       RETURN
+!       END ! GPARPL
 
 
 
-      SUBROUTINE GRDAIR(XGMIN,XGMAX, YGMIN,YGMAX,DXGN,DYGN,CHG,
-     &                  LXAXIS,LYAXIS,
-     &                  XOFF,XSF,YOFF,YSF, LMASK)
-      LOGICAL LXAXIS,LYAXIS
-C----------------------------------------
-C     Plots grid with axes.
-C     Intended for airfoil plot.
-C----------------------------------------
-      INCLUDE 'XDES.INC'
-C
-      CALL NEWPEN(1)
-C
-C---- plot outline
-      CALL PLOT(XMOD(XGMIN),YMOD(YGMIN),3)
-      CALL PLOT(XMOD(XGMAX),YMOD(YGMIN),2)
-      CALL PLOT(XMOD(XGMAX),YMOD(YGMAX),2)
-      CALL PLOT(XMOD(XGMIN),YMOD(YGMAX),2)
-      CALL PLOT(XMOD(XGMIN),YMOD(YGMIN),2)
-C
-      IF(LXAXIS)
-     &  CALL XAXIS(XMOD(XGMIN),YMOD(YGMIN),(XGMAX-XGMIN)*XSF,
-     &             DXGN*XSF, XGMIN,DXGN,CHG,-2)
-      IF(LYAXIS)
-     &  CALL YAXIS(XMOD(XGMIN),YMOD(YGMIN),(YGMAX-YGMIN)*YSF,
-     &             DYGN*YSF, YGMIN,DYGN,CHG,-2)
-C
-C---- fine grid
-      NXG = INT((XGMAX-XGMIN)/DXGN + 0.1)
-      NYG = INT((YGMAX-YGMIN)/DYGN + 0.1)
-      NXG = MAX(1,NXG)
-      NYG = MAX(1,NYG)
-C
-      X0 = XMOD(XGMIN)
-      Y0 = YMOD(YGMIN)
-      DXG = (XMOD(XGMAX)-X0)/NXG
-      DYG = (YMOD(YGMAX)-Y0)/NYG
-      CALL PLGRID(X0,Y0,NXG,DXG,NYG,DYG, LMASK)
-C
-      RETURN
-      END ! GRDAIR
+!       SUBROUTINE GRDAIR(XGMIN,XGMAX, YGMIN,YGMAX,DXGN,DYGN,CHG,
+!      &                  LXAXIS,LYAXIS,
+!      &                  XOFF,XSF,YOFF,YSF, LMASK)
+!       LOGICAL LXAXIS,LYAXIS
+! C----------------------------------------
+! C     Plots grid with axes.
+! C     Intended for airfoil plot.
+! C----------------------------------------
+!       INCLUDE 'XDES.INC'
+! C
+!       CALL NEWPEN(1)
+! C
+! C---- plot outline
+!       CALL PLOT(XMOD(XGMIN),YMOD(YGMIN),3)
+!       CALL PLOT(XMOD(XGMAX),YMOD(YGMIN),2)
+!       CALL PLOT(XMOD(XGMAX),YMOD(YGMAX),2)
+!       CALL PLOT(XMOD(XGMIN),YMOD(YGMAX),2)
+!       CALL PLOT(XMOD(XGMIN),YMOD(YGMIN),2)
+! C
+!       IF(LXAXIS)
+!      &  CALL XAXIS(XMOD(XGMIN),YMOD(YGMIN),(XGMAX-XGMIN)*XSF,
+!      &             DXGN*XSF, XGMIN,DXGN,CHG,-2)
+!       IF(LYAXIS)
+!      &  CALL YAXIS(XMOD(XGMIN),YMOD(YGMIN),(YGMAX-YGMIN)*YSF,
+!      &             DYGN*YSF, YGMIN,DYGN,CHG,-2)
+! C
+! C---- fine grid
+!       NXG = INT((XGMAX-XGMIN)/DXGN + 0.1)
+!       NYG = INT((YGMAX-YGMIN)/DYGN + 0.1)
+!       NXG = MAX(1,NXG)
+!       NYG = MAX(1,NYG)
+! C
+!       X0 = XMOD(XGMIN)
+!       Y0 = YMOD(YGMIN)
+!       DXG = (XMOD(XGMAX)-X0)/NXG
+!       DYG = (YMOD(YGMAX)-Y0)/NYG
+!       CALL PLGRID(X0,Y0,NXG,DXG,NYG,DYG, LMASK)
+! C
+!       RETURN
+!       END ! GRDAIR
+! 
+! 
+! 
+!       SUBROUTINE PLTAIR(XX,XXP,YY,YYP,SS,NN, XOFF,XSF,YOFF,YSF,COLOR)
+!       DIMENSION XX(NN), XXP(NN), YY(NN), YYP(NN), SS(NN)
+!       CHARACTER*(*) COLOR
+! C-----------------------------
+! C     Plots passed-in airfoil
+! C-----------------------------
+!       LOGICAL LCOLOR
+!       XMOD(XTMP) = XSF * (XTMP - XOFF)
+!       YMOD(YTMP) = YSF * (YTMP - YOFF)
+! C
+!       NT = 20
+! ccc      NT = 50
+! C
+!       LCOLOR = COLOR(1:1) .NE. ' '
+! C
+!       IF(LCOLOR) THEN
+!         CALL GETCOLOR(ICOL0)
+!         CALL NEWCOLORNAME(COLOR)
+!       ENDIF
+! C
+!       DO 60 I=2, NN
+!         DS = SS(I) - SS(I-1)
+!         CALL PLOT(XMOD(XX(I-1)),YMOD(YY(I-1)),3)
+! C
+! C------ subdivide current panel into NT segments for smoother airfoil plot
+!         DO 610 IT=1, NT
+!           ST = SS(I-1) + DS*FLOAT(IT)/FLOAT(NT)
+!           XT = SEVAL(ST,XX,XXP,SS,NN)
+!           YT = SEVAL(ST,YY,YYP,SS,NN)
+!           CALL PLOT(XMOD(XT),YMOD(YT),2)
+!   610   CONTINUE
+!    60 CONTINUE
+! C
+!       IF(LCOLOR) CALL NEWCOLOR(ICOL0)
+! C
+!       CALL PLFLUSH
+! C
+!       RETURN
+!       END ! PLTAIR
+! 
 
 
-
-      SUBROUTINE PLTAIR(XX,XXP,YY,YYP,SS,NN, XOFF,XSF,YOFF,YSF,COLOR)
-      DIMENSION XX(NN), XXP(NN), YY(NN), YYP(NN), SS(NN)
-      CHARACTER*(*) COLOR
-C-----------------------------
-C     Plots passed-in airfoil
-C-----------------------------
-      LOGICAL LCOLOR
-      XMOD(XTMP) = XSF * (XTMP - XOFF)
-      YMOD(YTMP) = YSF * (YTMP - YOFF)
-C
-      NT = 20
-ccc      NT = 50
-C
-      LCOLOR = COLOR(1:1) .NE. ' '
-C
-      IF(LCOLOR) THEN
-        CALL GETCOLOR(ICOL0)
-        CALL NEWCOLORNAME(COLOR)
-      ENDIF
-C
-      DO 60 I=2, NN
-        DS = SS(I) - SS(I-1)
-        CALL PLOT(XMOD(XX(I-1)),YMOD(YY(I-1)),3)
-C
-C------ subdivide current panel into NT segments for smoother airfoil plot
-        DO 610 IT=1, NT
-          ST = SS(I-1) + DS*FLOAT(IT)/FLOAT(NT)
-          XT = SEVAL(ST,XX,XXP,SS,NN)
-          YT = SEVAL(ST,YY,YYP,SS,NN)
-          CALL PLOT(XMOD(XT),YMOD(YT),2)
-  610   CONTINUE
-   60 CONTINUE
-C
-      IF(LCOLOR) CALL NEWCOLOR(ICOL0)
-C
-      CALL PLFLUSH
-C
-      RETURN
-      END ! PLTAIR
-
-
-
-      SUBROUTINE OVER(FNAME1)
-C----------------------------------------------------
-C     Overlays plot of airfoil from coordinate file.
-C----------------------------------------------------
-      INCLUDE 'XFOIL.INC'
-      CHARACTER*(*) FNAME1
-C
-      CHARACTER*32 NAME0, NAMEW
-      CHARACTER*80 ISPARS0
-C
-      IF(FNAME1(1:1).NE.' ') THEN
-       FNAME = FNAME1
-      ELSE
-C----- no argument... get it somehow
-       IF(ONAME(1:1).NE.' ') THEN
-C------ offer existing default
-        WRITE(*,1100) ONAME
- 1100   FORMAT(/' Enter filename:  ', A)
-        READ(*,1000) FNAME
- 1000   FORMAT(A)
-        CALL STRIP(FNAME,NFN)
-        IF(NFN.EQ.0) FNAME = ONAME
-       ELSE
-C------ just ask for filename
-        CALL ASKS('Enter filename^',FNAME)
-       ENDIF
-      ENDIF
-C
-      LU = 9
-      CALL AREAD(LU,FNAME,2*IQX,W1,W2,NN,NAME0,ISPARS0,ITYPE,1)
-      IF(ITYPE.EQ.0) RETURN
-C
-C---- set new default filename
-      ONAME = FNAME
-C
-      IF(LNORM) THEN
-C----- normalize to unit chord
-       CALL NORM(W1,W3,W2,W4,W5,NN)
-      ELSE
-       CALL SCALC(W1,W2,W5,NN)
-       CALL SEGSPL(W1,W3,W5,NN)
-       CALL SEGSPL(W2,W4,W5,NN)
-      ENDIF
-C
-      NAMEW  = NAME
-      SWLE   = SBLE  
-      CHORDW = CHORDB
-      AREAW  = AREAB 
-      RADWLE = RADBLE
-      ANGWTE = ANGBTE
-      EI11WA = EI11BA
-      EI22WA = EI22BA
-      APX1WA = APX1BA
-      APX2WA = APX2BA
-      EI11WT = EI11BT
-      EI22WT = EI22BT
-      APX1WT = APX1BT
-      APX2WT = APX2BT
-      THICKW = THICKB
-      CAMBRW = CAMBRB
-C
-      NAME = NAME0
-      CALL GEOPAR(W1,W3,W2,W4,W5,NN,W6,
-     &            SBLE,CHORDB,AREAB,RADBLE,ANGBTE,
-     &            EI11BA,EI22BA,APX1BA,APX2BA,
-     &            EI11BT,EI22BT,APX1BT,APX2BT,
-     &            THICKB,CAMBRB )
-C
-      IF(.NOT.LPLOT) THEN
-       CALL PLTINI
-ccc       CALL PLOT(0.05,0.30,-3)
-      ENDIF
-C
-      CALL NEWPEN(2)
-      CALL PLTAIR(W1,W3,W2,W4,W5,NN, XOFF,XSF, YOFF,YSF,'cyan')
-      CALL PLNEWP('cyan')
-C
-C---- restore parameters
-      NAME   = NAMEW
-      SBLE   = SWLE  
-      CHORDB = CHORDW
-      AREAB  = AREAW 
-      RADBLE = RADWLE
-      ANGBTE = ANGWTE
-      EI11BA = EI11WA
-      EI22BA = EI22WA
-      APX1BA = APX1WA
-      APX2BA = APX2WA
-      EI11BT = EI11WT
-      EI22BT = EI22WT
-      APX1BT = APX1WT
-      APX2BT = APX2WT
-      THICKB = THICKW
-      CAMBRB = CAMBRW
-C
-      RETURN
-      END ! OVER
+!       SUBROUTINE OVER(FNAME1)
+! C----------------------------------------------------
+! C     Overlays plot of airfoil from coordinate file.
+! C----------------------------------------------------
+!       INCLUDE 'XFOIL.INC'
+!       CHARACTER*(*) FNAME1
+! C
+!       CHARACTER*32 NAME0, NAMEW
+!       CHARACTER*80 ISPARS0
+! C
+!       IF(FNAME1(1:1).NE.' ') THEN
+!        FNAME = FNAME1
+!       ELSE
+! C----- no argument... get it somehow
+!        IF(ONAME(1:1).NE.' ') THEN
+! C------ offer existing default
+!         WRITE(*,1100) ONAME
+!  1100   FORMAT(/' Enter filename:  ', A)
+!         READ(*,1000) FNAME
+!  1000   FORMAT(A)
+!         CALL STRIP(FNAME,NFN)
+!         IF(NFN.EQ.0) FNAME = ONAME
+!        ELSE
+! C------ just ask for filename
+!         CALL ASKS('Enter filename^',FNAME)
+!        ENDIF
+!       ENDIF
+! C
+!       LU = 9
+!       CALL AREAD(LU,FNAME,2*IQX,W1,W2,NN,NAME0,ISPARS0,ITYPE,1)
+!       IF(ITYPE.EQ.0) RETURN
+! C
+! C---- set new default filename
+!       ONAME = FNAME
+! C
+!       IF(LNORM) THEN
+! C----- normalize to unit chord
+!        CALL NORM(W1,W3,W2,W4,W5,NN)
+!       ELSE
+!        CALL SCALC(W1,W2,W5,NN)
+!        CALL SEGSPL(W1,W3,W5,NN)
+!        CALL SEGSPL(W2,W4,W5,NN)
+!       ENDIF
+! C
+!       NAMEW  = NAME
+!       SWLE   = SBLE  
+!       CHORDW = CHORDB
+!       AREAW  = AREAB 
+!       RADWLE = RADBLE
+!       ANGWTE = ANGBTE
+!       EI11WA = EI11BA
+!       EI22WA = EI22BA
+!       APX1WA = APX1BA
+!       APX2WA = APX2BA
+!       EI11WT = EI11BT
+!       EI22WT = EI22BT
+!       APX1WT = APX1BT
+!       APX2WT = APX2BT
+!       THICKW = THICKB
+!       CAMBRW = CAMBRB
+! C
+!       NAME = NAME0
+!       CALL GEOPAR(W1,W3,W2,W4,W5,NN,W6,
+!      &            SBLE,CHORDB,AREAB,RADBLE,ANGBTE,
+!      &            EI11BA,EI22BA,APX1BA,APX2BA,
+!      &            EI11BT,EI22BT,APX1BT,APX2BT,
+!      &            THICKB,CAMBRB )
+! C
+! !       IF(.NOT.LPLOT) THEN
+! !        CALL PLTINI
+! ccc       CALL PLOT(0.05,0.30,-3)
+! !       ENDIF
+! C
+! !       CALL NEWPEN(2)
+! !       CALL PLTAIR(W1,W3,W2,W4,W5,NN, XOFF,XSF, YOFF,YSF,'cyan')
+! !       CALL PLNEWP('cyan')
+! C
+! C---- restore parameters
+!       NAME   = NAMEW
+!       SBLE   = SWLE  
+!       CHORDB = CHORDW
+!       AREAB  = AREAW 
+!       RADBLE = RADWLE
+!       ANGBTE = ANGWTE
+!       EI11BA = EI11WA
+!       EI22BA = EI22WA
+!       APX1BA = APX1WA
+!       APX2BA = APX2WA
+!       EI11BT = EI11WT
+!       EI22BT = EI22WT
+!       APX1BT = APX1WT
+!       APX2BT = APX2WT
+!       THICKB = THICKW
+!       CAMBRB = CAMBRW
+! C
+!       RETURN
+!       END ! OVER
 
 

@@ -38,11 +38,12 @@ endif()
 include(CTest)
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=legacy -fdefault-real-8")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=legacy")
+  set (CMAKE_Fortran_FLAGS_RELEASE "-funroll-all-loops -fno-f2c -O3")
 endif()
 
 option(DOUBLE_PRECISION
-  "Make the real and complex types eight bytes long" ON)
+  "Make the real and complex types eight bytes long" OFF)
 
 if(DOUBLE_PRECISION)
   if(CMAKE_Fortran_COMPILER_ID STREQUAL Intel)
@@ -62,7 +63,7 @@ set(ORRS_DIR "${CMAKE_SOURCE_DIR}/orrs")
 
 add_subdirectory(orrs)
 add_subdirectory(osrc)
-add_subdirectory(plotlib)
+# add_subdirectory(plotlib)
 add_subdirectory(src)
 
 set(XFOIL_DOCS version_notes.txt xfoil_doc.txt)

@@ -50,7 +50,7 @@ C
       SIZE = 6.0
       PAR = 0.75
 C
-      CALL PLINITIALIZE
+!       CALL PLINITIALIZE
 C
 C
       N = 1001
@@ -148,32 +148,32 @@ C
       IF(ETAE .GT. 30.01) DETA = 5.0
       ETAE = DETA * AINT( ETAE/DETA + 0.51 )
 C
-      CALL PLOPEN(0.7,IPSLU,IDEV)
-      CALL PLOTABS(0.5,1.0,-3)
+!       CALL PLOPEN(0.7,IPSLU,IDEV)
+!       CALL PLOTABS(0.5,1.0,-3)
 C
-      CALL NEWFACTOR(SIZE)
-      CALL GETCOLOR(ICOL0)
+!       CALL NEWFACTOR(SIZE)
+!       CALL GETCOLOR(ICOL0)
 C
-      CALL PLOT(0.5*PAR,0.0,-3)
+!       CALL PLOT(0.5*PAR,0.0,-3)
 C
-      CALL NEWPEN(1)
-      CALL XAXIS(0.0,0.0,-PAR, 0.2*PAR,0.0, 0.2,0.7*CH,1)
-      CALL YAXIS(0.0,0.0,-1.0,DETA*EWT,0.0,DETA,0.7*CH,1)
+!       CALL NEWPEN(1)
+!       CALL XAXIS(0.0,0.0,-PAR, 0.2*PAR,0.0, 0.2,0.7*CH,1)
+!       CALL YAXIS(0.0,0.0,-1.0,DETA*EWT,0.0,DETA,0.7*CH,1)
 C
-      CALL NEWPEN(2)
+!       CALL NEWPEN(2)
       XL = -4.0*CH
       YL = (ETAE-1.5*DETA)*EWT - 0.5*CH
-      CALL PLCHAR(XL,YL,CH,'y/ ',0.0,3)
-      CALL PLMATH(XL,YL,CH,'  q',0.0,3)
+!       CALL PLCHAR(XL,YL,CH,'y/ ',0.0,3)
+!       CALL PLMATH(XL,YL,CH,'  q',0.0,3)
 C
 C
       UWT = PAR
-      CALL NEWPEN(4)
-      CALL XYLINE(N,U,ETA,0.0,UWT,0.0,EWT,1)
-      CALL NEWPEN(3)
-      CALL XYSYMB(N,U,ETA,0.0,UWT,0.0,EWT,0.125*CH,1)
+!       CALL NEWPEN(4)
+!       CALL XYLINE(N,U,ETA,0.0,UWT,0.0,EWT,1)
+!       CALL NEWPEN(3)
+!       CALL XYSYMB(N,U,ETA,0.0,UWT,0.0,EWT,0.125*CH,1)
 C
-      CALL PLFLUSH
+!       CALL PLFLUSH
 C
       RE = 100.0
       OMEGAR = 0.1
@@ -333,16 +333,16 @@ C
         WRITE(*,*)
 C
         IF(IPASS.EQ.1) THEN
-          CALL SCALIT(N,UT,0.0,USF,ANN,NANN)
+!           CALL SCALIT(N,UT,0.0,USF,ANN,NANN)
           UWT = PAR*USF
 C
-          CALL SCALIT(N,VT,0.0,VSF,ANN,NANN)
+!           CALL SCALIT(N,VT,0.0,VSF,ANN,NANN)
           VWT = PAR*VSF
 C
-          CALL SCALIT(N,PT,0.0,PSF,ANN,NANN)
+!           CALL SCALIT(N,PT,0.0,PSF,ANN,NANN)
           PWT = PAR*PSF
 C
-          CALL SCALIT(N,QQ,0.0,TSF,ANN,NANN)
+!           CALL SCALIT(N,QQ,0.0,TSF,ANN,NANN)
           TWT = PAR*TSF
 C
           EOFF = 0.
@@ -354,34 +354,34 @@ C
         ENDIF
 C
 C
-        CALL NEWPEN(3)
+!         CALL NEWPEN(3)
 C
         XL = PAR + 5.0*CH
 C
         YL = ETAE*EWT
-        CALL PLCHAR(XL       ,YL       ,    CH,'H     = ',0.0, 8)
-        CALL PLNUMB(XL+8.0*CH,YL       ,    CH, H        ,0.0, 3)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'H     = ',0.0, 8)
+!         CALL PLNUMB(XL+8.0*CH,YL       ,    CH, H        ,0.0, 3)
 C
         YL = YL - 3.5*CH
-        CALL PLCHAR(XL       ,YL       ,    CH,'Re    = ',0.0, 8)
-        CALL PLMATH(XL+1.9*CH,YL-0.4*CH,0.8*CH,  'q'     ,0.0, 1)
-        CALL PLNUMB(XL+8.0*CH,YL       ,    CH, RE       ,0.0,-1)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'Re    = ',0.0, 8)
+!         CALL PLMATH(XL+1.9*CH,YL-0.4*CH,0.8*CH,  'q'     ,0.0, 1)
+!         CALL PLNUMB(XL+8.0*CH,YL       ,    CH, RE       ,0.0,-1)
 C
         YL = YL - 2.5*CH
-        CALL PLMATH(XL       ,YL       ,    CH,'w q/  = ',0.0, 8)
-        CALL PLCHAR(XL       ,YL       ,    CH,'    U   ',0.0, 8)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'      ,0.0, 1)
-        CALL PLNUMB(XL+8.0*CH,YL       ,    CH, OMEGAR   ,0.0, 5)
+!         CALL PLMATH(XL       ,YL       ,    CH,'w q/  = ',0.0, 8)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'    U   ',0.0, 8)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'      ,0.0, 1)
+!         CALL PLNUMB(XL+8.0*CH,YL       ,    CH, OMEGAR   ,0.0, 5)
 C
         YL = YL - 3.5*CH
-        CALL PLMATH(XL       ,YL       ,    CH,'a q   = ',0.0, 8)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'      ,0.0, 1)
-        CALL PLNUMB(XL+8.0*CH,YL       ,    CH, ALPHAR   ,0.0, 5)
+!         CALL PLMATH(XL       ,YL       ,    CH,'a q   = ',0.0, 8)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'      ,0.0, 1)
+!         CALL PLNUMB(XL+8.0*CH,YL       ,    CH, ALPHAR   ,0.0, 5)
 C
         YL = YL - 2.5*CH
-        CALL PLMATH(XL       ,YL       ,    CH,'a q   = ',0.0, 8)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'i'      ,0.0, 1)
-        CALL PLNUMB(XL+8.0*CH,YL       ,    CH, ALPHAI   ,0.0, 5)
+!         CALL PLMATH(XL       ,YL       ,    CH,'a q   = ',0.0, 8)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'i'      ,0.0, 1)
+!         CALL PLNUMB(XL+8.0*CH,YL       ,    CH, ALPHAI   ,0.0, 5)
 C
 C
 C
@@ -390,103 +390,103 @@ C
         YLIN(1) =  0.5*CH
         YLIN(2) =  0.5*CH
 C
-        CALL NEWPEN(2)
+!         CALL NEWPEN(2)
 C
         XL = PAR + 12.0*CH
         YL = 0.50*ETAE*EWT
 C
-        CALL NEWCOLORNAME('red')
-        CALL XYLINE(N,UTR,ETA,UOFF,UWT,EOFF,EWT,2)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,2)
-        CALL PLCHAR(XL       ,YL       ,    CH,'u /U',0.0,4)
-        CALL PLMATH(XL       ,YL       ,    CH,' `  ',0.0,4)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'  ,0.0,1)
+!         CALL NEWCOLORNAME('red')
+!         CALL XYLINE(N,UTR,ETA,UOFF,UWT,EOFF,EWT,2)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,2)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'u /U',0.0,4)
+!         CALL PLMATH(XL       ,YL       ,    CH,' `  ',0.0,4)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'  ,0.0,1)
 C
         YL = YL - 2.5*CH
 C
-        CALL NEWCOLORNAME('orange')
-        CALL XYLINE(N,UTI,ETA,UOFF,UWT,EOFF,EWT,3)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,3)
-        CALL PLCHAR(XL       ,YL       ,    CH,'u /U',0.0,4)
-        CALL PLMATH(XL       ,YL       ,    CH,' `  ',0.0,4)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'i'  ,0.0,1)
+!         CALL NEWCOLORNAME('orange')
+!         CALL XYLINE(N,UTI,ETA,UOFF,UWT,EOFF,EWT,3)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,3)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'u /U',0.0,4)
+!         CALL PLMATH(XL       ,YL       ,    CH,' `  ',0.0,4)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'i'  ,0.0,1)
 C
         YL = YL - 2.5*CH
 C
-        CALL NEWCOLORNAME('yellow')
-        CALL XYLINE(N,UT ,ETA,UOFF,UWT,EOFF,EWT,1)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
-        CALL PLCHAR(XL       ,YL       ,    CH,'u /U',0.0,4)
-        CALL PLMATH(XL       ,YL       ,    CH,' `  ',0.0,4)
-        CALL PLCHAR(XL-0.6*CH,YL       ,0.9*CH,'| |' ,0.0,3)
+!         CALL NEWCOLORNAME('yellow')
+!         CALL XYLINE(N,UT ,ETA,UOFF,UWT,EOFF,EWT,1)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'u /U',0.0,4)
+!         CALL PLMATH(XL       ,YL       ,    CH,' `  ',0.0,4)
+!         CALL PLCHAR(XL-0.6*CH,YL       ,0.9*CH,'| |' ,0.0,3)
 C
 C
         YL = YL - 3.5*CH
 C
-        CALL NEWCOLORNAME('violet')
-        CALL XYLINE(N,PTR,ETA,POFF,PWT,EOFF,EWT,5)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,5)
-        CALL PLCHAR(XL       ,YL       ,    CH,'p / U ',0.0,6)
-        CALL PLMATH(XL       ,YL       ,    CH,' ` r 2',0.0,6)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'  ,0.0,1)
+!         CALL NEWCOLORNAME('violet')
+!         CALL XYLINE(N,PTR,ETA,POFF,PWT,EOFF,EWT,5)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,5)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'p / U ',0.0,6)
+!         CALL PLMATH(XL       ,YL       ,    CH,' ` r 2',0.0,6)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'r'  ,0.0,1)
 C
         YL = YL - 2.5*CH
 C
-        CALL NEWCOLORNAME('blue')
-        CALL XYLINE(N,PTI,ETA,POFF,PWT,EOFF,EWT,6)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,6)
-        CALL PLCHAR(XL       ,YL       ,    CH,'p / U ',0.0,6)
-        CALL PLMATH(XL       ,YL       ,    CH,' ` r 2',0.0,6)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'i'  ,0.0,1)
+!         CALL NEWCOLORNAME('blue')
+!         CALL XYLINE(N,PTI,ETA,POFF,PWT,EOFF,EWT,6)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,6)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'p / U ',0.0,6)
+!         CALL PLMATH(XL       ,YL       ,    CH,' ` r 2',0.0,6)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 'i'  ,0.0,1)
 C
         YL = YL - 2.5*CH
 C
-        CALL NEWCOLORNAME('cyan')
-        CALL XYLINE(N,PT ,ETA,POFF,PWT,EOFF,EWT,1)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
-        CALL PLCHAR(XL       ,YL       ,    CH,'p / U ',0.0,6)
-        CALL PLMATH(XL       ,YL       ,    CH,' ` r 2',0.0,6)
-        CALL PLCHAR(XL-0.6*CH,YL       ,0.9*CH,'| |'   ,0.0,3)
+!         CALL NEWCOLORNAME('cyan')
+!         CALL XYLINE(N,PT ,ETA,POFF,PWT,EOFF,EWT,1)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'p / U ',0.0,6)
+!         CALL PLMATH(XL       ,YL       ,    CH,' ` r 2',0.0,6)
+!         CALL PLCHAR(XL-0.6*CH,YL       ,0.9*CH,'| |'   ,0.0,3)
 C
         YL = YL - 3.5*CH
 C
-        CALL NEWCOLORNAME('green')
-        CALL XYLINE(N,QQ ,ETA,TOFF,TWT,EOFF,EWT,2)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,2)
-        CALL PLMATH(XL       ,YL+0.2*CH,    CH,' ___ '   ,0.0,5)
-        CALL PLMATH(XL       ,YL       ,    CH,'  ` `  2',0.0,8)
-        CALL PLCHAR(XL       ,YL       ,    CH,' q q /U ',0.0,8)
+!         CALL NEWCOLORNAME('green')
+!         CALL XYLINE(N,QQ ,ETA,TOFF,TWT,EOFF,EWT,2)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,2)
+!         CALL PLMATH(XL       ,YL+0.2*CH,    CH,' ___ '   ,0.0,5)
+!         CALL PLMATH(XL       ,YL       ,    CH,'  ` `  2',0.0,8)
+!         CALL PLCHAR(XL       ,YL       ,    CH,' q q /U ',0.0,8)
 C
         YL = YL - 2.5*CH
 C
-        CALL NEWCOLORNAME('green')
-        CALL XYLINE(N,UV ,ETA,TOFF,-10.0*TWT,EOFF,EWT,1)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
-        CALL PLMATH(XL       ,YL+0.2*CH,    CH,' ___        ',0.0,12)
-        CALL PLMATH(XL       ,YL       ,    CH,'  ` `  2 #  ',0.0,12)
-        CALL PLCHAR(XL       ,YL       ,    CH,'-u v /U   10',0.0,12)
+!         CALL NEWCOLORNAME('green')
+!         CALL XYLINE(N,UV ,ETA,TOFF,-10.0*TWT,EOFF,EWT,1)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
+!         CALL PLMATH(XL       ,YL+0.2*CH,    CH,' ___        ',0.0,12)
+!         CALL PLMATH(XL       ,YL       ,    CH,'  ` `  2 #  ',0.0,12)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'-u v /U   10',0.0,12)
 C
         YL = YL - 3.5*CH
 C
-        CALL NEWCOLORNAME('magenta')
-        CALL XYLINE(N,TVT,ETA,TOFF,TWT,EOFF,EWT,1)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
-        CALL PLMATH(XL       ,YL+0.2*CH,    CH,'n   2    ',0.0,9)
-        CALL PLCHAR(XL       ,YL       ,    CH,'  /U     ',0.0,9)
-        CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 't'  ,0.0,1)
+!         CALL NEWCOLORNAME('magenta')
+!         CALL XYLINE(N,TVT,ETA,TOFF,TWT,EOFF,EWT,1)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,1)
+!         CALL PLMATH(XL       ,YL+0.2*CH,    CH,'n   2    ',0.0,9)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'  /U     ',0.0,9)
+!         CALL PLCHAR(XL+0.9*CH,YL-0.3*CH,0.8*CH, 't'  ,0.0,1)
 C
         YL = YL - 2.5*CH
 C
-        CALL NEWCOLORNAME('magenta')
-        CALL XYLINE(N,TV,ETA,TOFF,TWT,EOFF,EWT,2)
-        CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,2)
-        CALL PLMATH(XL       ,YL+0.2*CH,    CH,'n   2',0.0,5)
-        CALL PLMATH(XL       ,YL+0.2*CH,    CH,'~'    ,0.0,1)
-        CALL PLCHAR(XL       ,YL       ,    CH,'  /U ',0.0,5)
+!         CALL NEWCOLORNAME('magenta')
+!         CALL XYLINE(N,TV,ETA,TOFF,TWT,EOFF,EWT,2)
+!         CALL XYLINE(2,XLIN,YLIN,-XL,1.0,-YL,1.0,2)
+!         CALL PLMATH(XL       ,YL+0.2*CH,    CH,'n   2',0.0,5)
+!         CALL PLMATH(XL       ,YL+0.2*CH,    CH,'~'    ,0.0,1)
+!         CALL PLCHAR(XL       ,YL       ,    CH,'  /U ',0.0,5)
 C
-        CALL NEWCOLOR(ICOL0)
+!         CALL NEWCOLOR(ICOL0)
 C
-        CALL PLFLUSH
+!         CALL PLFLUSH
 C
  99     CONTINUE
         WRITE(*,*) 'Zoom, Unzoom, Annotate, Hardcopy, Dump ?'
@@ -494,18 +494,18 @@ C
  1000   FORMAT(A)
 C
         IF    (INDEX('Zz',ANS) .NE. 0) THEN
-          CALL USETZOOM(.FALSE.,.TRUE.)
-          CALL REPLOT(IDEV)
+!           CALL USETZOOM(.FALSE.,.TRUE.)
+!           CALL REPLOT(IDEV)
           GO TO 99
         ELSEIF(INDEX('Uu',ANS) .NE. 0) THEN
-          CALL CLRZOOM
-          CALL REPLOT(IDEV)
+!           CALL CLRZOOM
+!           CALL REPLOT(IDEV)
           GO TO 99
         ELSEIF(INDEX('Aa',ANS) .NE. 0) THEN
-          CALL ANNOT(CH)
+!           CALL ANNOT(CH)
           GO TO 99
         ELSEIF(INDEX('Hh',ANS) .NE. 0) THEN
-          CALL REPLOT(IDEVRP)
+!           CALL REPLOT(IDEVRP)
           GO TO 99
         ELSEIF(INDEX('Dd',ANS) .NE. 0) THEN
           LU = 9
@@ -522,7 +522,7 @@ C
   100 CONTINUE
   101 CONTINUE
 C
-      CALL PLCLOSE
+!       CALL PLCLOSE
       STOP
       END
 

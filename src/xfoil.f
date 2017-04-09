@@ -70,7 +70,7 @@ C
      &  /'          Repaneling with PANE and/or PPAR suggested'
      &  /'           (doing GDES,CADD before repaneling _may_'
      &  /'            improve excessively coarse LE spacing' )
-         CALL PANPLT
+!          CALL PANPLT
         ENDIF
        ENDIF
       ENDIF
@@ -132,7 +132,7 @@ C===============================================
 C
 C===============================================
       ELSEIF(COMAND.EQ.'QUIT') THEN
-       CALL PLCLOSE
+!        CALL PLCLOSE
        STOP
 C
 C===============================================
@@ -212,7 +212,7 @@ C
         CALL CANG(X,Y,N,0, IMAX,AMAX)
         IF(ABS(AMAX).GT.ANGTOL) THEN
          WRITE(*,1081) AMAX, IMAX
-         CALL PANPLT
+!          CALL PANPLT
         ENDIF
        ENDIF
 C
@@ -298,11 +298,11 @@ C===============================================
        CALL GETPAN
 C
 C===============================================
-      ELSEIF(COMAND.EQ.'PLOP') THEN
-       CALL OPLSET(IDEV,IDEVRP,IPSLU,
-     &             SIZE,PLOTAR,
-     &             XMARG,YMARG,XPAGE,YPAGE,
-     &             CH,SCRNFR,LCURS,LLAND)
+!       ELSEIF(COMAND.EQ.'PLOP') THEN
+!        CALL OPLSET(IDEV,IDEVRP,IPSLU,
+!      &             SIZE,PLOTAR,
+!      &             XMARG,YMARG,XPAGE,YPAGE,
+!      &             CH,SCRNFR,LCURS,LLAND)
 C
 C===============================================
       ELSEIF(COMAND.EQ.'WDEF') THEN
@@ -354,18 +354,18 @@ C===============================================
        CALL STRIP(NAME,NNAME)
 C
 C===============================================
-      ELSEIF(COMAND.EQ.'Z   ') THEN
-       IF(LPLOT) THEN
-        CALL USETZOOM(.TRUE.,.TRUE.)
-        CALL REPLOT(IDEV)
-       ENDIF
+!       ELSEIF(COMAND.EQ.'Z   ') THEN
+!        IF(LPLOT) THEN
+!         CALL USETZOOM(.TRUE.,.TRUE.)
+!         CALL REPLOT(IDEV)
+!        ENDIF
 C
 C===============================================
-      ELSEIF(COMAND.EQ.'U   ') THEN
-       IF(LPLOT) THEN
-        CALL CLRZOOM
-        CALL REPLOT(IDEV)
-       ENDIF
+!       ELSEIF(COMAND.EQ.'U   ') THEN
+!        IF(LPLOT) THEN
+!         CALL CLRZOOM
+!         CALL REPLOT(IDEV)
+!        ENDIF
 C
 C===============================================
       ELSE
@@ -747,11 +747,11 @@ C   9  violet
 C  10  magenta
 C
 C
-      CALL PLINITIALIZE
+!       CALL PLINITIALIZE
 C
 C---- set up color spectrum
       NCOLOR = 64
-      CALL COLORSPECTRUMHUES(NCOLOR,'RYGCBM')
+!       CALL COLORSPECTRUMHUES(NCOLOR,'RYGCBM')
 C
 C
       NNAME  = 32
@@ -2135,7 +2135,7 @@ C
       IF(N.LE.1) THEN
        WRITE(*,*) 'No current airfoil to plot'
       ELSE
-       CALL PANPLT
+!        CALL PANPLT
       ENDIF
       LCHANGE = .FALSE.
 C
@@ -2154,17 +2154,17 @@ C
 C
    12 CALL ASKC('Change what ? (<cr> if nothing else)^',VAR,COMARG)
 C
-      IF(VAR.EQ.'Z   ') THEN
-        CALL USETZOOM(.TRUE.,.TRUE.)
-        CALL REPLOT(IDEV)
-        GO TO 12
-      ENDIF
+!       IF(VAR.EQ.'Z   ') THEN
+!         CALL USETZOOM(.TRUE.,.TRUE.)
+!         CALL REPLOT(IDEV)
+!         GO TO 12
+!       ENDIF
 C
-      IF(VAR.EQ.'U   ') THEN
-        CALL CLRZOOM
-        CALL REPLOT(IDEV)
-        GO TO 12
-      ENDIF
+!       IF(VAR.EQ.'U   ') THEN
+!         CALL CLRZOOM
+!         CALL REPLOT(IDEV)
+!         GO TO 12
+!       ENDIF
 C
 C
       DO I=1, 20
@@ -2188,7 +2188,7 @@ C-------- go back to paneling menu
           GO TO 5
         ENDIF
 C
-        CALL CLRZOOM
+!         CALL CLRZOOM
         RETURN
 C
       ELSE IF(VAR.EQ.'N   ' .OR. VAR.EQ.'n   ') THEN

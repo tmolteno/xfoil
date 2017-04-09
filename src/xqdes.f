@@ -37,7 +37,7 @@ C
       DIMENSION RINPUT(20)
       LOGICAL ERROR, LPLNEW
 C
-      EXTERNAL NEWPLOTQ
+!       EXTERNAL NEWPLOTQ
 C
       SAVE COMOLD, ARGOLD
 C
@@ -103,7 +103,7 @@ C----- initialize Qspec to "old" solution and notify user
 C
 C---- initialize blowup parameters and plot Qspec(s)
       CALL QPLINI(.TRUE.)
-      CALL QSPLOT
+!       CALL QSPLOT
 C
 C
 C====================================================
@@ -131,11 +131,11 @@ C---- process previous command ?
 C
       IF(COMAND.EQ.'    ') THEN
 C----- just <return> was typed... clean up plotting and exit OPER
-       IF(LPLOT) CALL PLEND
+!        IF(LPLOT) CALL PLEND
        LPLOT = .FALSE.
        LQSYM = .FALSE.
        LQSPPL = .FALSE.
-       CALL CLRZOOM
+!        CALL CLRZOOM
        RETURN
       ENDIF
 C
@@ -173,21 +173,21 @@ C--------------------------------------------------------
      &  /'   HARD   Hardcopy current plot')
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'Z   ') THEN
-       CALL USETZOOM(.TRUE.,.TRUE.)
-       CALL REPLOT(IDEV)
+!       ELSEIF(COMAND.EQ.'Z   ') THEN
+!        CALL USETZOOM(.TRUE.,.TRUE.)
+!        CALL REPLOT(IDEV)
 C
 C--------------------------------------------------------
-      ELSEIF(COMAND.EQ.'U   ') THEN
-       CALL CLRZOOM
-       CALL REPLOT(IDEV)
+!       ELSEIF(COMAND.EQ.'U   ') THEN
+!        CALL CLRZOOM
+!        CALL REPLOT(IDEV)
 C
 C--------------------------------------------------------
 C---- re-initialize Qspec to Q
       ELSEIF(COMAND.EQ.'QSET') THEN
        CALL GAMQSP(1)
        CALL QPLINI(.FALSE.)
-       CALL QSPLOT
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
@@ -201,7 +201,7 @@ C---- toggle Qvis plotting flag
         WRITE(*,*) 'Only Qspec will be plotted'
         CALL QPLINI(.FALSE.)
        ENDIF
-       CALL QSPLOT
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
@@ -214,13 +214,13 @@ C---- toggle reflected Qspec plotting flag
         WRITE(*,*) 'Reflected Qspec will not be plotted'
         CALL QPLINI(.FALSE.)
        ENDIF
-       CALL QSPLOT
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
 C---- get target segment endpoints
       ELSEIF(COMAND.EQ.'MARK') THEN
-       CALL IQSGET
+!        CALL IQSGET
       GO TO 500
 C
 C--------------------------------------------------------
@@ -230,9 +230,9 @@ C---- modify Qspec
 C----- make sure there is a Qspec(s) plot on the screen
        IF(.NOT.LQSPPL) THEN
         CALL QPLINI(.FALSE.)
-        CALL QSPLOT
+!         CALL QSPLOT
        ENDIF
-       CALL GETCOLOR(ICOL0)
+!        CALL GETCOLOR(ICOL0)
 C
 C----- set up arrays for calling MODIFY
        IFRST = 1
@@ -256,12 +256,12 @@ C----- get the user's modifying input
        XBOX(2) = XPAGE-XMARG
        YBOX(1) = YMARG
        YBOX(2) = YPAGE-YMARG
-       CALL MODIFY(IBX,IFRST,ILAST,NSIDE,NLINE,
-     &             XSP,YSP,YSPD, LQSLOP,
-     &             ISP1,ISP2,ISMOD,KQSP,
-     &             XBOX,YBOX, XBOX,YBOX,SIZE,
-     &             XOFF,YOFF,XSF,YSF, 'RED',' ',
-     &             NEWPLOTQ )
+!        CALL MODIFY(IBX,IFRST,ILAST,NSIDE,NLINE,
+!      &             XSP,YSP,YSPD, LQSLOP,
+!      &             ISP1,ISP2,ISMOD,KQSP,
+!      &             XBOX,YBOX, XBOX,YBOX,SIZE,
+!      &             XOFF,YOFF,XSF,YSF, 'RED',' ',
+!      &             NEWPLOTQ )
 C
 C----- put modified info back into global arrays
        IQMOD2 = NSP - ISP1 + 1
@@ -274,12 +274,12 @@ C----- put modified info back into global arrays
 C
 C----- display new splined Qspec(s)
        CALL SPLQSP(KQSP)
-       CALL NEWCOLORNAME('MAGENTA')
-       CALL QSPPLT(IQMOD1,IQMOD2,KQSP,NTQSPL)
-       CALL NEWCOLOR(ICOL0)
+!        CALL NEWCOLORNAME('MAGENTA')
+!        CALL QSPPLT(IQMOD1,IQMOD2,KQSP,NTQSPL)
+!        CALL NEWCOLOR(ICOL0)
 C
 C----- print forces associated with modified Qspec(s)
-       CALL PLFLUSH
+!        CALL PLFLUSH
        CALL CLCALC(N,X,Y,QSPEC(1,KQSP),W1,ALFA,MINF,QINF, XCMREF,YCMREF, 
      &             CLQSP(KQSP),CMQSP(KQSP),CDPQ, CLQ_ALF,CLQ_MSQ)
        WRITE(*,1200) CL,CM,CLQSP(KQSP),CMQSP(KQSP)
@@ -288,16 +288,16 @@ C
 C--------------------------------------------------------
 C---- smooth Qspec within target segment, or entire Qspec if not marked off
       ELSEIF(COMAND.EQ.'SMOO') THEN
-       CALL GETCOLOR(ICOL0)
+!        CALL GETCOLOR(ICOL0)
 C
        KQSP = 1
        CALL SMOOQ(IQ1,IQ2,KQSP)
        CALL SPLQSP(KQSP)
 C
-       CALL NEWCOLORNAME('magenta')
-       CALL QSPPLT(IQ1,IQ2,KQSP,NTQSPL)
-       CALL NEWCOLOR(ICOL0)
-       CALL PLFLUSH
+!        CALL NEWCOLORNAME('magenta')
+!        CALL QSPPLT(IQ1,IQ2,KQSP,NTQSPL)
+!        CALL NEWCOLOR(ICOL0)
+!        CALL PLFLUSH
        LQSPPL = .FALSE.
 C
        CALL CLCALC(N,X,Y,QSPEC(1,KQSP),W1,ALFA,MINF,QINF, XCMREF,YCMREF, 
@@ -321,17 +321,17 @@ C
 C--------------------------------------------------------
 C---- hardcopy replot
       ELSEIF(COMAND.EQ.'HARD') THEN
-       IF(LPLOT) CALL PLEND
-       LPLOT = .FALSE.
-       CALL REPLOT(IDEVRP)
+!        IF(LPLOT) CALL PLEND
+!        LPLOT = .FALSE.
+!        CALL REPLOT(IDEVRP)
       GO TO 500
 C
 C--------------------------------------------------------
 C---- plot Qspec and Q distributions
-      ELSEIF(COMAND.EQ.'PLOT' .OR.
-     &       COMAND.EQ.'P   '      ) THEN
-       CALL QPLINI(.FALSE.)
-       CALL QSPLOT
+!       ELSEIF(COMAND.EQ.'PLOT' .OR.
+!      &       COMAND.EQ.'P   '      ) THEN
+!        CALL QPLINI(.FALSE.)
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
@@ -340,9 +340,9 @@ C---- get blowup parameters
      &       COMAND.EQ.'B   '      ) THEN
        XWS = XWIND/SIZE
        YWS = YWIND/SIZE
-       CALL OFFGET(XOFF,YOFF,XSF,YSF,XWS,YWS, .FALSE. , .TRUE. )
+!        CALL OFFGET(XOFF,YOFF,XSF,YSF,XWS,YWS, .FALSE. , .TRUE. )
        CALL QPLINI(.FALSE.)
-       CALL QSPLOT
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
@@ -350,7 +350,7 @@ C---- reset blowup parameters and replot
       ELSEIF(COMAND.EQ.'RESE' .OR.
      &       COMAND.EQ.'R   '      ) THEN
        CALL QPLINI(.TRUE.)
-       CALL QSPLOT
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
@@ -363,12 +363,12 @@ C
        WRITE(*,*) 'Type I,O,P to In,Out,Pan with cursor...'
 C
  80    CALL QPLINI(.FALSE.)
-       CALL QSPLOT
+!        CALL QSPLOT
 C
-       CALL GETCURSORXY(XCRS,YCRS,CHKEY)
+!        CALL GETCURSORXY(XCRS,YCRS,CHKEY)
 C
 C----- do possible pan,zoom operations based on CHKEY
-       CALL KEYOFF(XCRS,YCRS,CHKEY, XWS,YWS, XOFF,YOFF,XSF,YSF, LPLNEW)
+!        CALL KEYOFF(XCRS,YCRS,CHKEY, XWS,YWS, XOFF,YOFF,XSF,YSF, LPLNEW)
 C
        IF(LPLNEW) THEN
         GO TO 80
@@ -376,26 +376,26 @@ C
 C
 C--------------------------------------------------------
 C---- annotate plot
-      ELSEIF(COMAND.EQ.'ANNO') THEN
-       IF(LPLOT) THEN
-        CALL ANNOT(CH)
-       ELSE
-        WRITE(*,*) 'No active plot to annotate'
-       ENDIF
+!       ELSEIF(COMAND.EQ.'ANNO') THEN
+!        IF(LPLOT) THEN
+!         CALL ANNOT(CH)
+!        ELSE
+!         WRITE(*,*) 'No active plot to annotate'
+!        ENDIF
       GO TO 500
 C
 C--------------------------------------------------------
 C---- change plot size
-      ELSEIF(COMAND.EQ.'SIZE') THEN
-       IF(NINPUT.GE.1) THEN
-        SIZE = RINPUT(1)
-       ELSE
-        WRITE(*,*) 'Current plot size =', SIZE
-        CALL ASKR('Enter new plot size^',SIZE)
-       ENDIF
-C
-       CALL QPLINI(.FALSE.)
-       CALL QSPLOT
+!       ELSEIF(COMAND.EQ.'SIZE') THEN
+!        IF(NINPUT.GE.1) THEN
+!         SIZE = RINPUT(1)
+!        ELSE
+!         WRITE(*,*) 'Current plot size =', SIZE
+!         CALL ASKR('Enter new plot size^',SIZE)
+!        ENDIF
+! C
+!        CALL QPLINI(.FALSE.)
+!        CALL QSPLOT
       GO TO 500
 C
 C--------------------------------------------------------
@@ -546,11 +546,11 @@ C
       END
 
 
-      SUBROUTINE NEWPLOTQ
-      CALL QPLINI(.FALSE.)
-      CALL QSPLOT
-      RETURN
-      END
+!       SUBROUTINE NEWPLOTQ
+!       CALL QPLINI(.FALSE.)
+!       CALL QSPLOT
+!       RETURN
+!       END
 
 
       SUBROUTINE QPLINI(LDEF)
@@ -612,7 +612,7 @@ C
 C
 C
 C---- start new plot
-      CALL PLTINI
+!       CALL PLTINI
 C
 C---- speed plotting scale factor
       QFAC = 1.0/(QMAX-QMIN)
@@ -664,349 +664,349 @@ C
 C
 C
 C---- plot axes
-      CALL NEWPEN(1)
-      CALL PLOT(XMOD(0.0),YMOD(0.0),3)
-      CALL PLOT(XMOD(1.0),YMOD(0.0),2)
-      CALL PLOT(XMOD(0.0),YMOD(QFAC*QMIN),3)
-      CALL PLOT(XMOD(0.0),YMOD(QFAC*QMAX),2)
-      CALL PLOT(XMOD(1.0),YMOD(QFAC*QMIN),3)
-      CALL PLOT(XMOD(1.0),YMOD(QFAC*QMAX),2)
-C
-C---- plot sonic lines if within range
-      IF( QSTAR/QINF.LE.QMAX)
-     &  CALL DASH(XMOD(0.0),XMOD(1.0),YMOD( QFAC*QSTAR/QINF))
-      IF(-QSTAR/QINF.GE.QMIN)
-     &  CALL DASH(XMOD(0.0),XMOD(1.0),YMOD(-QFAC*QSTAR/QINF))
-C
-C---- annotate axes
-      DO 20 NT=NMIN, NMAX
-        YPLT = QFAC*(QMAX-QMIN)*FLOAT(NT)/FLOAT(NMAX-NMIN)
-ccc        IF(MOD(NT,2).EQ.0) THEN
-         RNUM = DQANN*FLOAT(NT)
-         CALL NEWPEN(2)
-         XNUM = XMOD( 0.0)-3.5*CHQ 
-         YNUM = YMOD(YPLT)-0.5*CHQ
-         IF(RNUM.LT.0.0) XNUM = XNUM - CHQ
-         CALL PLNUMB(XNUM,YNUM,CHQ,RNUM,0.0,1)
-ccc        ENDIF
-C
-        QSPG(NT) = YMOD(0.0)
-        IF(IABS(NT).LE.NQ) QSPG(NT) = YMOD(YPLT)
-C
-        CALL NEWPEN(1)
-        CALL PLOT(XMOD(0.0)        ,YMOD(YPLT),3)
-        CALL PLOT(XMOD(0.0)-0.3*CHQ,YMOD(YPLT),2)
-        CALL PLOT(XMOD(1.0)        ,YMOD(YPLT),3)
-        CALL PLOT(XMOD(1.0)+0.3*CHQ,YMOD(YPLT),2)
-   20 CONTINUE
-C
-      XPLT = 0.5*(SSPG(NG-2)+SSPG(NG-3)) - 1.8*CHQ
-      CALL PLCHAR(XPLT,YMOD(0.0)-2.0*CHQ,1.2*CHQ,'x/c',0.0,3)
-C
-      YPLT = QFAC*(QMAX-QMIN)*(FLOAT(NMAX)-1.5)/FLOAT(NMAX-NMIN)
-      CALL PLCHAR(XMOD(0.0)-4.8*CHQ,YMOD(YPLT)-0.6*CHQ,
-     &            1.2*CHQ,'q/V ',0.0,4)
-      CALL PLMATH(XMOD(0.0)-4.8*CHQ,YMOD(YPLT)-0.6*CHQ,
-     &            1.2*CHQ,'   &',0.0,4)
-C
-      INCR = MAX((2*NG)/20,1)
-      DO 21 IG=-NG+INCR, NG-INCR, INCR
-        CALL PLOT(SSPG(IG),QSPG(0)+0.20*CHQ,3)
-        CALL PLOT(SSPG(IG),QSPG(0)-0.20*CHQ,2)
-        CALL PLOT(SLPG(IG),QSPG(0)+0.15*CHQ,3)
-        CALL PLOT(SLPG(IG),QSPG(0)-0.15*CHQ,2)
-   21 CONTINUE
-C
-      INCR = MAX((2*NG)/4,1)
-      DO 22 IG=-NG+INCR, NG-INCR, INCR
-        CALL PLOT(SSPG(IG),QSPG(0)+0.40*CHQ,3)
-        CALL PLOT(SSPG(IG),QSPG(0)-0.40*CHQ,2)
-        CALL PLOT(SLPG(IG),QSPG(0)+0.30*CHQ,3)
-        CALL PLOT(SLPG(IG),QSPG(0)-0.30*CHQ,2)
-   22 CONTINUE
-C
-      INCR = MAX((2*NG)/2,1)
-      DO 23 IG=-NG+INCR, NG-INCR, INCR
-        CALL PLOT(SSPG(IG),QSPG(0)+0.80*CHQ,3)
-        CALL PLOT(SSPG(IG),QSPG(0)-0.80*CHQ,2)
-        CALL PLOT(SLPG(IG),QSPG(0)+0.60*CHQ,3)
-        CALL PLOT(SLPG(IG),QSPG(0)-0.60*CHQ,2)
-   23 CONTINUE
-C
-C
-      IF(LQGRID) THEN
-        DO 30 K=1, NG
-          W1(K) = SSPG(K-NG) - SSPG(K-1-NG)
-          W2(K) = SSPG(K)    - SSPG(K-1)
-          W6(K) = SLPG(K-NG) - SLPG(K-1-NG)
-          W7(K) = SLPG(K)    - SLPG(K-1)
-   30   CONTINUE
-        DO 33 K=1, -NMIN
-          W3(K) = QSPG(K+NMIN) - QSPG(K-1+NMIN)
-   33   CONTINUE
-        DO 34 K=1, NMAX
-          W4(K) = QSPG(K)      - QSPG(K-1)
-   34   CONTINUE
-C
-        CALL NEWPEN(1)
-        CALL PLGRID(SSPG(-NG),QSPG(NMIN),1000+NG,W1,1000-NMIN,W3,LMASK2)
-        CALL PLGRID(SSPG(0)  ,QSPG(0)   ,1000+NG,W2,1000+NMAX,W4,LMASK2)
-cc        CALL PLGRID(SLPG(-NG),QSPG(NMIN),1000+NG,W6,1000-NMIN,W3,LMASK1)
-cc        CALL PLGRID(SLPG(0)  ,QSPG(0)   ,1000+NG,W7,1000+NMAX,W4,LMASK1)
-      ENDIF
-C
-      CALL PLFLUSH
-C
+!       CALL NEWPEN(1)
+!       CALL PLOT(XMOD(0.0),YMOD(0.0),3)
+!       CALL PLOT(XMOD(1.0),YMOD(0.0),2)
+!       CALL PLOT(XMOD(0.0),YMOD(QFAC*QMIN),3)
+!       CALL PLOT(XMOD(0.0),YMOD(QFAC*QMAX),2)
+!       CALL PLOT(XMOD(1.0),YMOD(QFAC*QMIN),3)
+!       CALL PLOT(XMOD(1.0),YMOD(QFAC*QMAX),2)
+! C
+! C---- plot sonic lines if within range
+!       IF( QSTAR/QINF.LE.QMAX)
+!      &  CALL DASH(XMOD(0.0),XMOD(1.0),YMOD( QFAC*QSTAR/QINF))
+!       IF(-QSTAR/QINF.GE.QMIN)
+!      &  CALL DASH(XMOD(0.0),XMOD(1.0),YMOD(-QFAC*QSTAR/QINF))
+! C
+! C---- annotate axes
+!       DO 20 NT=NMIN, NMAX
+!         YPLT = QFAC*(QMAX-QMIN)*FLOAT(NT)/FLOAT(NMAX-NMIN)
+! ccc        IF(MOD(NT,2).EQ.0) THEN
+!          RNUM = DQANN*FLOAT(NT)
+!          CALL NEWPEN(2)
+!          XNUM = XMOD( 0.0)-3.5*CHQ 
+!          YNUM = YMOD(YPLT)-0.5*CHQ
+!          IF(RNUM.LT.0.0) XNUM = XNUM - CHQ
+!          CALL PLNUMB(XNUM,YNUM,CHQ,RNUM,0.0,1)
+! ccc        ENDIF
+! C
+!         QSPG(NT) = YMOD(0.0)
+!         IF(IABS(NT).LE.NQ) QSPG(NT) = YMOD(YPLT)
+! C
+!         CALL NEWPEN(1)
+!         CALL PLOT(XMOD(0.0)        ,YMOD(YPLT),3)
+!         CALL PLOT(XMOD(0.0)-0.3*CHQ,YMOD(YPLT),2)
+!         CALL PLOT(XMOD(1.0)        ,YMOD(YPLT),3)
+!         CALL PLOT(XMOD(1.0)+0.3*CHQ,YMOD(YPLT),2)
+!    20 CONTINUE
+! C
+!       XPLT = 0.5*(SSPG(NG-2)+SSPG(NG-3)) - 1.8*CHQ
+!       CALL PLCHAR(XPLT,YMOD(0.0)-2.0*CHQ,1.2*CHQ,'x/c',0.0,3)
+! C
+!       YPLT = QFAC*(QMAX-QMIN)*(FLOAT(NMAX)-1.5)/FLOAT(NMAX-NMIN)
+!       CALL PLCHAR(XMOD(0.0)-4.8*CHQ,YMOD(YPLT)-0.6*CHQ,
+!      &            1.2*CHQ,'q/V ',0.0,4)
+!       CALL PLMATH(XMOD(0.0)-4.8*CHQ,YMOD(YPLT)-0.6*CHQ,
+!      &            1.2*CHQ,'   &',0.0,4)
+! C
+!       INCR = MAX((2*NG)/20,1)
+!       DO 21 IG=-NG+INCR, NG-INCR, INCR
+!         CALL PLOT(SSPG(IG),QSPG(0)+0.20*CHQ,3)
+!         CALL PLOT(SSPG(IG),QSPG(0)-0.20*CHQ,2)
+!         CALL PLOT(SLPG(IG),QSPG(0)+0.15*CHQ,3)
+!         CALL PLOT(SLPG(IG),QSPG(0)-0.15*CHQ,2)
+!    21 CONTINUE
+! C
+!       INCR = MAX((2*NG)/4,1)
+!       DO 22 IG=-NG+INCR, NG-INCR, INCR
+!         CALL PLOT(SSPG(IG),QSPG(0)+0.40*CHQ,3)
+!         CALL PLOT(SSPG(IG),QSPG(0)-0.40*CHQ,2)
+!         CALL PLOT(SLPG(IG),QSPG(0)+0.30*CHQ,3)
+!         CALL PLOT(SLPG(IG),QSPG(0)-0.30*CHQ,2)
+!    22 CONTINUE
+! C
+!       INCR = MAX((2*NG)/2,1)
+!       DO 23 IG=-NG+INCR, NG-INCR, INCR
+!         CALL PLOT(SSPG(IG),QSPG(0)+0.80*CHQ,3)
+!         CALL PLOT(SSPG(IG),QSPG(0)-0.80*CHQ,2)
+!         CALL PLOT(SLPG(IG),QSPG(0)+0.60*CHQ,3)
+!         CALL PLOT(SLPG(IG),QSPG(0)-0.60*CHQ,2)
+!    23 CONTINUE
+! C
+! C
+!       IF(LQGRID) THEN
+!         DO 30 K=1, NG
+!           W1(K) = SSPG(K-NG) - SSPG(K-1-NG)
+!           W2(K) = SSPG(K)    - SSPG(K-1)
+!           W6(K) = SLPG(K-NG) - SLPG(K-1-NG)
+!           W7(K) = SLPG(K)    - SLPG(K-1)
+!    30   CONTINUE
+!         DO 33 K=1, -NMIN
+!           W3(K) = QSPG(K+NMIN) - QSPG(K-1+NMIN)
+!    33   CONTINUE
+!         DO 34 K=1, NMAX
+!           W4(K) = QSPG(K)      - QSPG(K-1)
+!    34   CONTINUE
+! C
+!         CALL NEWPEN(1)
+!         CALL PLGRID(SSPG(-NG),QSPG(NMIN),1000+NG,W1,1000-NMIN,W3,LMASK2)
+!         CALL PLGRID(SSPG(0)  ,QSPG(0)   ,1000+NG,W2,1000+NMAX,W4,LMASK2)
+! cc        CALL PLGRID(SLPG(-NG),QSPG(NMIN),1000+NG,W6,1000-NMIN,W3,LMASK1)
+! cc        CALL PLGRID(SLPG(0)  ,QSPG(0)   ,1000+NG,W7,1000+NMAX,W4,LMASK1)
+!       ENDIF
+! C
+!       CALL PLFLUSH
+! C
       RETURN
       END
 
 
 
 
-      SUBROUTINE QSPLOT
-C------------------------------------------------
-C     Plots Q(s) and Qspec(s) distributions.
-C------------------------------------------------
-      INCLUDE 'XFOIL.INC'
-      INCLUDE 'XDES.INC'
-C
-C---- statement function for compressible Karman-Tsien velocity
-      QCOMP(G) = G*(1.0-TKLAM) / (1.0 - TKLAM*(G/QINF)**2)
-C
-C---- symbol height
-      SHT = 0.4*CHQ
-C
-      CALL GETCOLOR(ICOL0)
-C
-      IF(LSYM) THEN
-       IF(LIQSET) CALL NEWCOLORNAME('cyan')
-       DO 50 I=1, NSP
-         IF(LIQSET .AND. I.EQ.IQ1) CALL NEWCOLOR(ICOL0)
-         XPLT = 1.0 - SSPEC(I)
-         YPLT = QFAC*QCOMP(QGAMM(I))/QINF
-         CALL PLSYMB(XMOD(XPLT),YMOD(YPLT),SHT,3,0.,0)
-         IF(LIQSET .AND. I.EQ.IQ2) CALL NEWCOLORNAME('cyan')
-   50  CONTINUE
-       IF(LIQSET) CALL NEWCOLOR(ICOL0)
-      ENDIF
-C
-      NTQSPL = 1
-      IF(LQSLOP) NTQSPL = 8
-C
-C---- plot individual Qspec lines
-      DO 60 KQSP=1, NQSP
-        IF(LIQSET) THEN
-         CALL NEWCOLORNAME('cyan')
-         CALL QSPPLT(1,IQ1,KQSP,NTQSPL)
-         CALL NEWCOLOR(ICOL0)
-         CALL QSPPLT(IQ1,IQ2,KQSP,NTQSPL)
-         CALL NEWCOLORNAME('cyan')
-         CALL QSPPLT(IQ2,NSP,KQSP,NTQSPL)
-         CALL NEWCOLOR(ICOL0)
-        ELSE
-         CALL QSPPLT(1,NSP,KQSP,NTQSPL)
-        ENDIF
- 60   CONTINUE
-C
-C
-      IF(LQVDES) THEN
-       CALL NEWCOLORNAME('orange')
-       DO 65 I=2, N
-         DSP = S(I) - S(I-1)
-         DQV = QCOMP(QVIS(I)) - QCOMP(QVIS(I-1))
-         SP1 = (S(I-1) + 0.25*DSP)/S(N)
-         SP2 = (S(I)   - 0.25*DSP)/S(N)
-         QV1 = QCOMP(QVIS(I-1)) + 0.25*DQV
-         QV2 = QCOMP(QVIS(I)  ) - 0.25*DQV
-         CALL PLOT(XMOD(1.0-SP1),YMOD(QFAC*QV1/QINF),3)
-         CALL PLOT(XMOD(1.0-SP2),YMOD(QFAC*QV2/QINF),2)
-   65  CONTINUE
-       CALL NEWCOLOR(ICOL0)
-      ENDIF
-C
-      IF(LQREFL) THEN
-       IF(LIQSET) CALL NEWCOLORNAME('cyan')
-C
-       KQSP = 1
-C
-C----- find stagnation point SSPEC value SSPST
-       DO 70 ISTSP=1, NSP-1
-         IF(QSPEC(ISTSP+1,KQSP).LT.0.0) GO TO 71
-   70  CONTINUE
-   71  DSSP = SSPEC(ISTSP+1)   - SSPEC(ISTSP)
-       DQSP = QSPEC(ISTSP+1,KQSP) - QSPEC(ISTSP,KQSP)
-       SSPST = SSPEC(ISTSP) - QSPEC(ISTSP,KQSP)*DSSP/DQSP
-C
-C----- plot reflected suction side QSPEC over pressure side QSPEC,
-C-     fudging arc length SSPEC so stagnation points conside
-       SPFUDG = (SSPEC(NSP) - SSPST) / (SSPST - SSPEC(1))
-       DO 80 I=2, ISTSP
-         DSP =  SSPEC(I) - SSPEC(I-1)
-         DQS = QCOMP(QSPEC(I,KQSP)) - QCOMP(QSPEC(I-1,KQSP))
-         SP1 = (SSPEC(I-1) + 0.35*DSP)*SPFUDG
-         SP2 = (SSPEC(I)   - 0.35*DSP)*SPFUDG
-         QS1 = QCOMP(QSPEC(I-1,KQSP)) + 0.35*DQS
-         QS2 = QCOMP(QSPEC(I  ,KQSP)) - 0.35*DQS
-         CALL PLOT(XMOD(SP1),YMOD(-QFAC*QS1/QINF),3)
-         CALL PLOT(XMOD(SP2),YMOD(-QFAC*QS2/QINF),2)
-   80  CONTINUE
-C
-C----- plot reflected pressure side QSPEC over suction side QSPEC,
-C-     again fudging arc length SSPEC so stagnation points coincide
-       SPFUDG = (SSPST - SSPEC(1)) / (SSPEC(NSP) - SSPST)
-       DO 85 I=ISTSP+1, NSP
-         DSP =  SSPEC(I) - SSPEC(I-1)
-         DQS = QCOMP(QSPEC(I,KQSP)) - QCOMP(QSPEC(I-1,KQSP))
-         SP1 = 1.0 - SSPST + (SSPEC(I-1) + 0.35*DSP - SSPST)*SPFUDG
-         SP2 = 1.0 - SSPST + (SSPEC(I)   - 0.35*DSP - SSPST)*SPFUDG
-         QS1 = QCOMP(QSPEC(I-1,KQSP)) + 0.35*DQS
-         QS2 = QCOMP(QSPEC(I  ,KQSP)) - 0.35*DQS
-         CALL PLOT(XMOD(SP1),YMOD(-QFAC*QS1/QINF),3)
-         CALL PLOT(XMOD(SP2),YMOD(-QFAC*QS2/QINF),2)
-   85  CONTINUE
-C
-       CALL NEWCOLOR(ICOL0)
-      ENDIF
-C
-C
-      CALL PLFLUSH
-      LQSPPL = .TRUE.
-C
-      IF(.NOT.LIQSET) RETURN
-C
-      KQSP = KQTARG
-C
-      CALL NEWCOLORNAME('cyan')
-      YPLT1 = QFAC*QCOMP(QSPEC(IQ1,KQSP))/QINF
-      YPLT2 = QFAC*QCOMP(QSPEC(IQ2,KQSP))/QINF
-      CALL PLOT(XMOD(1.0-SSPEC(IQ1)),YMOD(YPLT1)-0.03,3)
-      CALL PLOT(XMOD(1.0-SSPEC(IQ1)),YMOD(YPLT1)+0.03,2)
-      CALL PLOT(XMOD(1.0-SSPEC(IQ2)),YMOD(YPLT2)-0.03,3)
-      CALL PLOT(XMOD(1.0-SSPEC(IQ2)),YMOD(YPLT2)+0.03,2)
-      CALL NEWCOLOR(ICOL0)
-      CALL PLFLUSH
-C
-      RETURN
-      END
-
-
-      SUBROUTINE QSPPLT(IQSPL1,IQSPL2,KQSP,NT)
-C------------------------------------------
-C     Plots KQSP-th Qspec(s) distribution
-C     between indices IQSPL1..IQSPL2
-C------------------------------------------
-C
-      INCLUDE 'XFOIL.INC'
-      INCLUDE 'XDES.INC'
-C
-C---- statement function for compressible Karman-Tsien velocity
-      QCOMP(G) = G*(1.0-TKLAM) / (1.0 - TKLAM*(G/QINF)**2)
-C
-C---- go over chosen intervals
-      DO I=IQSPL1+1, IQSPL2
-        DS = SSPEC(I) - SSPEC(I-1)
-C
-C------ plot Qpsec using NT sub-intervals for smooth curve
-        IPL = 3
-        DO IT=0, NT
-          SSPT = SSPEC(I-1) + DS*FLOAT(IT)/FLOAT(NT)
-          QSPT = SEVAL(SSPT,QSPEC(1,KQSP),QSPECP(1,KQSP),SSPEC,NSP)
-          XPLT = 1.0 - SSPT
-          YPLT = QFAC*QCOMP(QSPT)/QINF
-          CALL PLOT(XMOD(XPLT),YMOD(YPLT),IPL)
-          IPL = 2
-        ENDDO
-      ENDDO
-C
-      RETURN
-      END
-
-
+!       SUBROUTINE QSPLOT
+! C------------------------------------------------
+! C     Plots Q(s) and Qspec(s) distributions.
+! C------------------------------------------------
+!       INCLUDE 'XFOIL.INC'
+!       INCLUDE 'XDES.INC'
+! C
+! C---- statement function for compressible Karman-Tsien velocity
+!       QCOMP(G) = G*(1.0-TKLAM) / (1.0 - TKLAM*(G/QINF)**2)
+! C
+! C---- symbol height
+!       SHT = 0.4*CHQ
+! C
+!       CALL GETCOLOR(ICOL0)
+! C
+!       IF(LSYM) THEN
+!        IF(LIQSET) CALL NEWCOLORNAME('cyan')
+!        DO 50 I=1, NSP
+!          IF(LIQSET .AND. I.EQ.IQ1) CALL NEWCOLOR(ICOL0)
+!          XPLT = 1.0 - SSPEC(I)
+!          YPLT = QFAC*QCOMP(QGAMM(I))/QINF
+!          CALL PLSYMB(XMOD(XPLT),YMOD(YPLT),SHT,3,0.,0)
+!          IF(LIQSET .AND. I.EQ.IQ2) CALL NEWCOLORNAME('cyan')
+!    50  CONTINUE
+!        IF(LIQSET) CALL NEWCOLOR(ICOL0)
+!       ENDIF
+! C
+!       NTQSPL = 1
+!       IF(LQSLOP) NTQSPL = 8
+! C
+! C---- plot individual Qspec lines
+!       DO 60 KQSP=1, NQSP
+!         IF(LIQSET) THEN
+!          CALL NEWCOLORNAME('cyan')
+!          CALL QSPPLT(1,IQ1,KQSP,NTQSPL)
+!          CALL NEWCOLOR(ICOL0)
+!          CALL QSPPLT(IQ1,IQ2,KQSP,NTQSPL)
+!          CALL NEWCOLORNAME('cyan')
+!          CALL QSPPLT(IQ2,NSP,KQSP,NTQSPL)
+!          CALL NEWCOLOR(ICOL0)
+!         ELSE
+!          CALL QSPPLT(1,NSP,KQSP,NTQSPL)
+!         ENDIF
+!  60   CONTINUE
+! C
+! C
+!       IF(LQVDES) THEN
+!        CALL NEWCOLORNAME('orange')
+!        DO 65 I=2, N
+!          DSP = S(I) - S(I-1)
+!          DQV = QCOMP(QVIS(I)) - QCOMP(QVIS(I-1))
+!          SP1 = (S(I-1) + 0.25*DSP)/S(N)
+!          SP2 = (S(I)   - 0.25*DSP)/S(N)
+!          QV1 = QCOMP(QVIS(I-1)) + 0.25*DQV
+!          QV2 = QCOMP(QVIS(I)  ) - 0.25*DQV
+!          CALL PLOT(XMOD(1.0-SP1),YMOD(QFAC*QV1/QINF),3)
+!          CALL PLOT(XMOD(1.0-SP2),YMOD(QFAC*QV2/QINF),2)
+!    65  CONTINUE
+!        CALL NEWCOLOR(ICOL0)
+!       ENDIF
+! C
+!       IF(LQREFL) THEN
+!        IF(LIQSET) CALL NEWCOLORNAME('cyan')
+! C
+!        KQSP = 1
+! C
+! C----- find stagnation point SSPEC value SSPST
+!        DO 70 ISTSP=1, NSP-1
+!          IF(QSPEC(ISTSP+1,KQSP).LT.0.0) GO TO 71
+!    70  CONTINUE
+!    71  DSSP = SSPEC(ISTSP+1)   - SSPEC(ISTSP)
+!        DQSP = QSPEC(ISTSP+1,KQSP) - QSPEC(ISTSP,KQSP)
+!        SSPST = SSPEC(ISTSP) - QSPEC(ISTSP,KQSP)*DSSP/DQSP
+! C
+! C----- plot reflected suction side QSPEC over pressure side QSPEC,
+! C-     fudging arc length SSPEC so stagnation points conside
+!        SPFUDG = (SSPEC(NSP) - SSPST) / (SSPST - SSPEC(1))
+!        DO 80 I=2, ISTSP
+!          DSP =  SSPEC(I) - SSPEC(I-1)
+!          DQS = QCOMP(QSPEC(I,KQSP)) - QCOMP(QSPEC(I-1,KQSP))
+!          SP1 = (SSPEC(I-1) + 0.35*DSP)*SPFUDG
+!          SP2 = (SSPEC(I)   - 0.35*DSP)*SPFUDG
+!          QS1 = QCOMP(QSPEC(I-1,KQSP)) + 0.35*DQS
+!          QS2 = QCOMP(QSPEC(I  ,KQSP)) - 0.35*DQS
+!          CALL PLOT(XMOD(SP1),YMOD(-QFAC*QS1/QINF),3)
+!          CALL PLOT(XMOD(SP2),YMOD(-QFAC*QS2/QINF),2)
+!    80  CONTINUE
+! C
+! C----- plot reflected pressure side QSPEC over suction side QSPEC,
+! C-     again fudging arc length SSPEC so stagnation points coincide
+!        SPFUDG = (SSPST - SSPEC(1)) / (SSPEC(NSP) - SSPST)
+!        DO 85 I=ISTSP+1, NSP
+!          DSP =  SSPEC(I) - SSPEC(I-1)
+!          DQS = QCOMP(QSPEC(I,KQSP)) - QCOMP(QSPEC(I-1,KQSP))
+!          SP1 = 1.0 - SSPST + (SSPEC(I-1) + 0.35*DSP - SSPST)*SPFUDG
+!          SP2 = 1.0 - SSPST + (SSPEC(I)   - 0.35*DSP - SSPST)*SPFUDG
+!          QS1 = QCOMP(QSPEC(I-1,KQSP)) + 0.35*DQS
+!          QS2 = QCOMP(QSPEC(I  ,KQSP)) - 0.35*DQS
+!          CALL PLOT(XMOD(SP1),YMOD(-QFAC*QS1/QINF),3)
+!          CALL PLOT(XMOD(SP2),YMOD(-QFAC*QS2/QINF),2)
+!    85  CONTINUE
+! C
+!        CALL NEWCOLOR(ICOL0)
+!       ENDIF
+! C
+! C
+!       CALL PLFLUSH
+!       LQSPPL = .TRUE.
+! C
+!       IF(.NOT.LIQSET) RETURN
+! C
+!       KQSP = KQTARG
+! C
+!       CALL NEWCOLORNAME('cyan')
+!       YPLT1 = QFAC*QCOMP(QSPEC(IQ1,KQSP))/QINF
+!       YPLT2 = QFAC*QCOMP(QSPEC(IQ2,KQSP))/QINF
+!       CALL PLOT(XMOD(1.0-SSPEC(IQ1)),YMOD(YPLT1)-0.03,3)
+!       CALL PLOT(XMOD(1.0-SSPEC(IQ1)),YMOD(YPLT1)+0.03,2)
+!       CALL PLOT(XMOD(1.0-SSPEC(IQ2)),YMOD(YPLT2)-0.03,3)
+!       CALL PLOT(XMOD(1.0-SSPEC(IQ2)),YMOD(YPLT2)+0.03,2)
+!       CALL NEWCOLOR(ICOL0)
+!       CALL PLFLUSH
+! C
+!       RETURN
+!       END
+! 
+! 
+!       SUBROUTINE QSPPLT(IQSPL1,IQSPL2,KQSP,NT)
+! C------------------------------------------
+! C     Plots KQSP-th Qspec(s) distribution
+! C     between indices IQSPL1..IQSPL2
+! C------------------------------------------
+! C
+!       INCLUDE 'XFOIL.INC'
+!       INCLUDE 'XDES.INC'
+! C
+! C---- statement function for compressible Karman-Tsien velocity
+!       QCOMP(G) = G*(1.0-TKLAM) / (1.0 - TKLAM*(G/QINF)**2)
+! C
+! C---- go over chosen intervals
+!       DO I=IQSPL1+1, IQSPL2
+!         DS = SSPEC(I) - SSPEC(I-1)
+! C
+! C------ plot Qpsec using NT sub-intervals for smooth curve
+!         IPL = 3
+!         DO IT=0, NT
+!           SSPT = SSPEC(I-1) + DS*FLOAT(IT)/FLOAT(NT)
+!           QSPT = SEVAL(SSPT,QSPEC(1,KQSP),QSPECP(1,KQSP),SSPEC,NSP)
+!           XPLT = 1.0 - SSPT
+!           YPLT = QFAC*QCOMP(QSPT)/QINF
+!           CALL PLOT(XMOD(XPLT),YMOD(YPLT),IPL)
+!           IPL = 2
+!         ENDDO
+!       ENDDO
+! C
+!       RETURN
+!       END
+! 
+! 
+!  
  
- 
-      SUBROUTINE IQSGET
-C------------------------------------------------------------
-C     Sets target segment endpoint indices from cursor input.
-C------------------------------------------------------------
-      INCLUDE 'XFOIL.INC'
-      DIMENSION IQNEW(2)
-      CHARACTER*1 KCHAR
-      INCLUDE 'XDES.INC'
-C
-C---- statement function for compressible Karman-Tsien velocity
-      QCOMP(G) = G*(1.0-TKLAM) / (1.0 - TKLAM*(G/QINF)**2)
-C
-      IF(.NOT.LQSPPL) THEN
-       CALL QPLINI(.FALSE.)
-       CALL QSPLOT
-      ENDIF
-C
-      SH = 0.01*XSF
-C
-      CALL GETCOLOR(ICOL0)
-C
-      IQNEW(1) = 0
-      IQNEW(2) = 0
-      WRITE(*,*)
-      WRITE(*,*) 'Mark off segment endpoints'
-      WRITE(*,*)
-      DO 10 IE=1, 2
-C
-C------ get cursor location from user
-    5   CALL GETCURSORXY(XE,YE,KCHAR)
-        DMIN = 1.0E9
-        IQNEW(IE) = 1
-        KQMIN = 1
-C
-C------ search all Qspec lines only for first selected point
-        IF(IE.EQ.1) THEN
-          KQSP1 = 1
-          KQSPN = NQSP
-        ELSE
-          KQSP1 = KQTARG
-          KQSPN = KQTARG
-        ENDIF
-C
-C------ find plot point closest to cursor point
-        DO 102 KQSP=KQSP1, KQSPN
-          DO 1024 I=1, NSP
-            GCOMP = QCOMP(QSPEC(I,KQSP))/QINF
-            XPNT = XMOD(1.0-SSPEC(I))
-            YPNT = YMOD(QFAC*GCOMP)
-            DIST = (XE - XPNT)**2 + (YE - YPNT)**2
-            IF(DIST.GT.DMIN) GO TO 1024
-              DMIN = DIST
-              IQNEW(IE) = I
-              KQMIN = KQSP
- 1024     CONTINUE
- 102    CONTINUE
-C
-C------ nearest point to first clicked point sets target line
-        IF(IE.EQ.1) KQTARG = KQMIN
-C
-        CALL NEWCOLORNAME('red')
-        I = IQNEW(IE)
-        QSCOMP = QCOMP(QSPEC(I,KQTARG))/QINF 
-        CALL PLOT(XMOD(1.0-SSPEC(I)),YMOD(QFAC*QSCOMP)-0.03,3)
-        CALL PLOT(XMOD(1.0-SSPEC(I)),YMOD(QFAC*QSCOMP)+0.03,2)
-        CALL NEWCOLOR(ICOL0)
-        CALL PLFLUSH
-   10 CONTINUE
-C
-      IF(IQNEW(1).EQ.IQNEW(2)) THEN
-       WRITE(*,*) '***  Endpoints must be distinct  ***'
-       WRITE(*,*) '***  NEW SEGMENT NOT MARKED OFF  ***'
-       RETURN
-      ENDIF
-C
-      IQ1 = MIN0(IQNEW(1),IQNEW(2))
-      IQ2 = MAX0(IQNEW(1),IQNEW(2))
-C
-      LIQSET = .TRUE.
-      RETURN
-      END
-
-
+!       SUBROUTINE IQSGET
+! C------------------------------------------------------------
+! C     Sets target segment endpoint indices from cursor input.
+! C------------------------------------------------------------
+!       INCLUDE 'XFOIL.INC'
+!       DIMENSION IQNEW(2)
+!       CHARACTER*1 KCHAR
+!       INCLUDE 'XDES.INC'
+! C
+! C---- statement function for compressible Karman-Tsien velocity
+!       QCOMP(G) = G*(1.0-TKLAM) / (1.0 - TKLAM*(G/QINF)**2)
+! C
+!       IF(.NOT.LQSPPL) THEN
+!        CALL QPLINI(.FALSE.)
+!        CALL QSPLOT
+!       ENDIF
+! C
+!       SH = 0.01*XSF
+! C
+!       CALL GETCOLOR(ICOL0)
+! C
+!       IQNEW(1) = 0
+!       IQNEW(2) = 0
+!       WRITE(*,*)
+!       WRITE(*,*) 'Mark off segment endpoints'
+!       WRITE(*,*)
+!       DO 10 IE=1, 2
+! C
+! C------ get cursor location from user
+!     5   CALL GETCURSORXY(XE,YE,KCHAR)
+!         DMIN = 1.0E9
+!         IQNEW(IE) = 1
+!         KQMIN = 1
+! C
+! C------ search all Qspec lines only for first selected point
+!         IF(IE.EQ.1) THEN
+!           KQSP1 = 1
+!           KQSPN = NQSP
+!         ELSE
+!           KQSP1 = KQTARG
+!           KQSPN = KQTARG
+!         ENDIF
+! C
+! C------ find plot point closest to cursor point
+!         DO 102 KQSP=KQSP1, KQSPN
+!           DO 1024 I=1, NSP
+!             GCOMP = QCOMP(QSPEC(I,KQSP))/QINF
+!             XPNT = XMOD(1.0-SSPEC(I))
+!             YPNT = YMOD(QFAC*GCOMP)
+!             DIST = (XE - XPNT)**2 + (YE - YPNT)**2
+!             IF(DIST.GT.DMIN) GO TO 1024
+!               DMIN = DIST
+!               IQNEW(IE) = I
+!               KQMIN = KQSP
+!  1024     CONTINUE
+!  102    CONTINUE
+! C
+! C------ nearest point to first clicked point sets target line
+!         IF(IE.EQ.1) KQTARG = KQMIN
+! C
+!         CALL NEWCOLORNAME('red')
+!         I = IQNEW(IE)
+!         QSCOMP = QCOMP(QSPEC(I,KQTARG))/QINF 
+!         CALL PLOT(XMOD(1.0-SSPEC(I)),YMOD(QFAC*QSCOMP)-0.03,3)
+!         CALL PLOT(XMOD(1.0-SSPEC(I)),YMOD(QFAC*QSCOMP)+0.03,2)
+!         CALL NEWCOLOR(ICOL0)
+!         CALL PLFLUSH
+!    10 CONTINUE
+! C
+!       IF(IQNEW(1).EQ.IQNEW(2)) THEN
+!        WRITE(*,*) '***  Endpoints must be distinct  ***'
+!        WRITE(*,*) '***  NEW SEGMENT NOT MARKED OFF  ***'
+!        RETURN
+!       ENDIF
+! C
+!       IQ1 = MIN0(IQNEW(1),IQNEW(2))
+!       IQ2 = MAX0(IQNEW(1),IQNEW(2))
+! C
+!       LIQSET = .TRUE.
+!       RETURN
+!       END
+! 
+! 
 
 
       SUBROUTINE SPLQSP(KQSP)

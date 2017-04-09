@@ -21,24 +21,14 @@
 #############################################################################
 
 set(XFOIL_SRCS xfoil.f xpanel.f xoper.f xtcam.f xgdes.f xqdes.f xmdes.f
-  CIRCLE.INC xsolve.f xbl.f XBL.INC xblsys.f xpol.f xplots.f pntops.f
-  XDES.INC xgeom.f xutils.f modify.f blplot.f polplt.f aread.f naca.f
-  spline.f plutil.f iopol.f PINDEX.INC gui.f sort.f dplot.f XFOIL.INC
+  CIRCLE.INC xsolve.f xbl.f XBL.INC xblsys.f xpol.f 
+  XDES.INC xgeom.f xutils.f aread.f naca.f
+  spline.f iopol.f PINDEX.INC sort.f XFOIL.INC
   profil.f userio.f)
-
-option(INDIVIDUAL_TS_WAVE_FREQUENCY_PLOTTING
-  "Individual TS-wave frequency plotting" OFF)
-
-if(INDIVIDUAL_TS_WAVE_FREQUENCY_PLOTTING)
-  set(XFOIL_SRCS ${XFOIL_SRCS} frplot.f ntcalc.f $<TARGET_OBJECTS:getosfile>
-     $<TARGET_OBJECTS:osmap>)
-else()
-  set(XFOIL_SRCS ${XFOIL_SRCS} frplot0.f)
-endif()
 
 add_executable(xfoil ${XFOIL_SRCS})
 set_target_properties(xfoil PROPERTIES VERSION ${PROJECT_VERSION})
-target_link_libraries(xfoil plt)
+target_link_libraries(xfoil)
 
 export(TARGETS xfoil FILE "${CMAKE_BINARY_DIR}/xfoil-targets.cmake")
 
@@ -50,14 +40,4 @@ set(XFOIL_COPYING gpl.txt)
 install(FILES ${XFOIL_COPYING} DESTINATION ${CMAKE_INSTALL_DOCDIR}
   RENAME COPYING)
 
-set(PXPLOT_SRCS pxplot.f PXPLOT.INC plutil.f gui.f userio.f)
-add_executable(pxplot ${PXPLOT_SRCS})
-set_target_properties(pxplot PROPERTIES VERSION ${PROJECT_VERSION})
-target_link_libraries(pxplot plt)
-install(TARGETS pxplot DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-set(PPLOT_SRCS pplot.f PPLOT.INC polplt.f sort.f iopol.f PINDEX.INC userio.f)
-add_executable(pplot ${PPLOT_SRCS})
-set_target_properties(pplot PROPERTIES VERSION ${PROJECT_VERSION})
-target_link_libraries(pplot plt)
-install(TARGETS pplot DESTINATION ${CMAKE_INSTALL_BINDIR})
