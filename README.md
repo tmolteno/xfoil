@@ -1,12 +1,16 @@
-Fork of XFOIL
-=============
+=Fork of XFOIL
 
 *Subsonic Airfoil Development System*
 
 <http://web.mit.edu/drela/Public/web/xfoil/>
 
-```
-$ mkdir build && cd build
-$ cmake ..
-$ make install
-```
+==INSTALL==
+
+Installation instructions on debian based linux machines.
+
+    sudo aptitude install gfortran cmake  libx11-dev
+
+    mkdir build && cd build
+    cmake ..
+    make install
+
