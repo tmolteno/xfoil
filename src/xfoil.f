@@ -212,7 +212,7 @@ C
         CALL CANG(X,Y,N,0, IMAX,AMAX)
         IF(ABS(AMAX).GT.ANGTOL) THEN
          WRITE(*,1081) AMAX, IMAX
-         CALL PANPLT
+CCC         CALL PANPLT
         ENDIF
        ENDIF
 C
@@ -2134,8 +2134,8 @@ C
  5    CONTINUE
       IF(N.LE.1) THEN
        WRITE(*,*) 'No current airfoil to plot'
-      ELSE
-       CALL PANPLT
+CCC      ELSE
+CCC       CALL PANPLT
       ENDIF
       LCHANGE = .FALSE.
 C
